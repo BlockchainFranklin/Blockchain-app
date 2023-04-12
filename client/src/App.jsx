@@ -1,37 +1,26 @@
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Navbar, Footer, HomePage, LoginPage, Blob } from './components';
 import styles from "./style";
+import PreLoader from "./components/PreLoader"; 
 
-import { Billing, Business, Button, Clients, CTA, FeedbackCard, AboutUs,
-         Footer, GetStarted, Hero, Navbar, Stats, KeyFeatures } from './components'
+const App = () => {
+  return (
 
-const App = () => (
-  <div className="bg-primary w-full overflow-hidden">
-    <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-      <div className={`${styles.boxWidth}`}>
-        <Navbar />
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path="/blob" element={<Blob />} />
+      </Routes>
+      <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Footer />
+        </div>
       </div>
-    </div> 
-
-
-    <div className={`bg-primary ${styles.flexStart}`}>
-      <div className={`${styles.boxWidth}`}>
-        <Hero />
-      </div>    
-    </div>
-
-
-    <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
-      <div className={`${styles.boxWidth}`}>
-        <AboutUs />
-        <KeyFeatures />
-        <Business />
-        <Billing />
-        <Clients /> 
-        <CTA /> 
-      </div>    
-    </div>
-
-
-  </div>
+    </BrowserRouter>
+ 
   );
+};
 
-export default App
+export default App;

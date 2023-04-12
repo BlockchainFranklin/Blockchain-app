@@ -1,60 +1,56 @@
 import airbnb from "./airbnb.png";
-import bill from "./bill.png";
 import binance from "./binance.png";
 import card from "./card.png";
-import coinbase from "./coinbase.png";
-import dropbox from "./dropbox.png";
+import close from "./close.svg";
 import logo from "./logo.png";
-import logotemp from "./logotemp.svg";
+import menu from "./menu.svg";
+import money from "./money.png";
+import qr from "./qr.png";
 import quotes from "./quotes.svg";
-import robot from "./robot.png";
 import send from "./Send.svg";
 import shield from "./Shield.svg";
 import star from "./Star.svg";
-import menu from "./menu.svg";
-import close from "./close.svg";
+import googleSoon from "./googleSoon.png";
 import google from "./google.svg";
-import apple from "./apple.svg";
-import arrowUp from "./arrow-up.svg";
-import discount from "./Discount.svg";
+import icons from "./icons.png";
 import facebook from "./facebook.svg";
 import instagram from "./instagram.svg";
 import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
-import people01 from "./people01.png";
-import people02 from "./people02.png";
-import people03 from "./people03.png";
 import tempMuscular from "./tempMuscular.png";
-import glosrozsadku from "./glosrozsadku.png";
+import tempcat from "./tempcat.png";
+import workFirst from "./workFirst.svg";
+import adam from "./adam.png";
+import facebookIcon from "./facebook.png";
+import instagramIcon from "./instagram.png";
+import linkedinIcon from "./linkedin.png";
 
 
 export {
   airbnb,
-  bill,
   binance,
   card,
-  coinbase,
-  dropbox,
+  close,
   logo,
-  logotemp,
+  menu,
+  qr,
+  money,
   quotes,
-  robot,
   send,
   shield,
   star,
-  menu,
-  close,
+  googleSoon,
   google,
-  apple,
-  arrowUp,
-  discount,
+  icons,
   facebook,
   instagram,
   linkedin,
   twitter,
-  people01,
-  people02,
-  people03,
   tempMuscular,
-  glosrozsadku,
+  tempcat,
+  workFirst,
+  adam,
+  facebookIcon,
+  instagramIcon, 
+  linkedinIcon,
 };
