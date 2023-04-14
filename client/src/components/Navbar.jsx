@@ -29,8 +29,8 @@ const Navbar = () => {
           </a>
         </li>
       ))}
-      <div class="mx-10">
-      <button class="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+      <div className="mx-10">
+      <button className="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
         <Link to="/login">Connect to Wallet </Link>
     
       </button>
@@ -62,8 +62,8 @@ const Navbar = () => {
             </li>
             
           ))}
-          <div class="mx-10">
-          <button class="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+          <div className="mx-10">
+          <button className="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
             <Link to="/login">Connect to Wallet </Link>
         
           </button>

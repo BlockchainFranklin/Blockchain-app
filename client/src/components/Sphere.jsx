@@ -10,7 +10,7 @@ const Blob = () => {
   const uniforms = useMemo(() => {
     return {
       u_time: { value: 0 },
-      u_intensity: { value: 0.3 },
+      u_intensity: { value: 1.3 },
     };
   });
 

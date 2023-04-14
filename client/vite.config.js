@@ -7,6 +7,9 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
+  optimizeDeps: {
+    include: ['events'],
+  },
   server: {
    host: true,
    port: 3000, // This is the port which we will use in docker

@@ -53,16 +53,16 @@ const ContactUs = () => {
                 <br></br>
 
                 <div className="text-center">
-                <div class="">
-                <section class="row">
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/adam.miernicki.fb" target="_blank" role="button"
+                <div className="">
+                <section className="row">
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/adam.miernicki.fb" target="_blank" role="button"
                     ><img src={facebook} alt="facebookIcon" className="w-[100%] h-[100%] rounded-full " /></a>
             
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
                   target="_blank" role="button"
                     ><img src={instagram} alt="instagramIcon" className="w-[100%] h-[100%] " /></a>
 
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
                   target="_blank" role="button"
                     ><img src={linkedin} alt="linkedinIcon" className="w-[100%] h-[100%] " /></a>
 
@@ -99,16 +99,16 @@ const ContactUs = () => {
                 <br></br>
 
                 <div className="text-center">
-                <div class="">
-                <section class="row">
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/adam.miernicki.fb" target="_blank" role="button"
+                <div className="">
+                <section className="row">
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/adam.miernicki.fb" target="_blank" role="button"
                     ><img src={facebook} alt="facebookIcon" className="w-[100%] h-[100%] rounded-full " /></a>
             
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
                   target="_blank" role="button"
                     ><img src={instagram} alt="instagramIcon" className="w-[100%] h-[100%] " /></a>
 
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
                   target="_blank" role="button"
                     ><img src={linkedin} alt="linkedinIcon" className="w-[100%] h-[100%] " /></a>
 
@@ -144,16 +144,16 @@ const ContactUs = () => {
                 <br></br>
 
                 <div className="text-center">
-                <div class="">
-                <section class="row">
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/adam.miernicki.fb" target="_blank" role="button"
+                <div className="">
+                <section className="row">
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/adam.miernicki.fb" target="_blank" role="button"
                     ><img src={facebook} alt="facebookIcon" className="w-[100%] h-[100%] rounded-full " /></a>
             
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
                   target="_blank" role="button"
                     ><img src={instagram} alt="instagramIcon" className="w-[100%] h-[100%] " /></a>
 
-                  <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
+                  <a className="btn btn-outline-light btn-floating m-1" href="https://www.google.com/search?q=duck+meme&tbm=isch&ved=2ahUKEwiLpeezhJn-AhVOuyoKHULjA1gQ2-cCegQIABAA&oq=duck+meme&gs_lcp=CgNpbWcQAzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCAAQigUQQzoKCAAQigUQsQMQQzoICAAQgAQQsQNQ3AlY9BNgqxVoAHAAeACAAU-IAeUFkgECMTCYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=F7YwZMu9Bc72qgHCxo_ABQ&bih=979&biw=1920#imgrc=-5aTn88j4CtGAM" 
                   target="_blank" role="button"
                     ><img src={linkedin} alt="linkedinIcon" className="w-[100%] h-[100%] " /></a>
 

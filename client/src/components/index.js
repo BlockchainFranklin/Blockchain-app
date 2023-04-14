@@ -10,6 +10,7 @@ import WorkFourth from './WorkFourth'
 import ContactUs from './ContactUs'
 
 
+
 import Billing from './Billing'
 import Business from './Business'
 import Button from './Button'
@@ -28,6 +29,11 @@ import Blob from './Blob'
 import Sphere from './Sphere'
 import fragmentShader from './fragmentShader'
 import vertexShader from './vertexShader'
+import metaMask from './metaMask'
+import { injected } from './connectors'
+import WalletPage from './WalletPage'
+import Navbar3 from './Navbar3'
+import NotFoundPage from './NotFoundPage'
 
 export {
     Navbar,
@@ -49,6 +55,11 @@ export {
     Sphere,
     fragmentShader,
     vertexShader,
+    metaMask,
+    injected,
+    WalletPage,
+    Navbar3,
+    NotFoundPage,
 
     Billing,
     Business,

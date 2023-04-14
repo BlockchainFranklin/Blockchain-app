@@ -5,7 +5,7 @@ import { navLinks } from '../constants';
 import { useReadingProgress } from '../hooks'
 
 
-const Navbar = () => {
+const Navbar2 = () => {
 
 
   const [toggle, setToggle] = useState(false)
@@ -16,16 +16,9 @@ const Navbar = () => {
     
     <img src={logo} alt="chainfit" className="w-[100px] h-[65px]" />
 
-    <div class="mx-10">
-    <button class="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+    <div className="mx-10">
+    <button className="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
       <Link to="/">Return to home </Link>
-  
-    </button>
-    </div>
-
-    <div class="mx-10">
-    <button class="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
-      <Link to="/blob">BLOOBOBO </Link>
   
     </button>
     </div>
@@ -44,4 +37,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Navbar2
