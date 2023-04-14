@@ -14,12 +14,12 @@ RUN npm install --silent
 COPY . .
 
 # default command
-RUN npm run build
+CMD npm run build
 
 ### STAGE 2: Production Environment ###
 FROM nginx:1.21.6-alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
