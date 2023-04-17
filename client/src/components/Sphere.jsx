@@ -1,6 +1,6 @@
 import React, { useMemo, useRef } from "react";
-import vertexShader from "../components/vertexShader";
-import fragmentShader from "../components/fragmentShader";
+import vertexShader from "../hooks/vertexShader";
+import fragmentShader from "../hooks/fragmentShader";
 import { useFrame } from "@react-three/fiber";
 import { MathUtils } from "three";
 
@@ -44,5 +44,4 @@ const Blob = () => {
     </mesh>
   );
 };
-
 export default Blob;
