@@ -24,7 +24,11 @@ import adam from "./adam.png";
 import facebookIcon from "./facebook.png";
 import instagramIcon from "./instagram.png";
 import linkedinIcon from "./linkedin.png";
-
+import julia from "./julia.png";
+import milosz from "./milosz.jpg";
+import phantom from "./phantom.png"; 
+import metamask from "./metamask.png";
+import hole from "./hole.jpg";
 
 export {
   airbnb,
@@ -53,4 +57,9 @@ export {
   facebookIcon,
   instagramIcon, 
   linkedinIcon,
+  julia,
+  milosz,
+  phantom,
+  metamask,
+  hole,
 };

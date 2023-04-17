@@ -191,6 +191,30 @@ canvas {
   filter: blur(123px);
 }
 
+
+.blue__gradient_animation {
+  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
+  filter: blur(123px);
+  opacity: 1; /* Początkowa wartość przezroczystości */
+  animation-name: fade1; /* Nazwa animacji */
+  animation-duration: 20s; /* Czas trwania animacji */
+  animation-timing-function: ease-in-out; /* Funkcja czasu animacji */
+  animation-iteration-count: infinite; /* Liczba powtórzeń animacji (w tym przypadku nieskończoność) */
+}
+
+@keyframes fade1 {
+  0% {
+    opacity: 1; /* Początkowa wartość przezroczystości */
+  }
+  50% {
+    opacity: 0; /* Wartość przezroczystości w połowie animacji (efekt znikania) */
+  }
+  100% {
+    opacity: 1; /* Końcowa wartość przezroczystości (efekt pojawiania się) */
+  }
+}
+
+
 .yellow__gradient {
   background: linear-gradient(180deg, rgba(249, 255, 165, 0) 0%, #f2e18d 100%);
   filter: blur(123px);
@@ -200,6 +224,17 @@ canvas {
   background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #2c2a59 100%);
   filter: blur(123px);
 }
+
+.dark__gradient_animation {
+  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #2c2a59 100%);
+  filter: blur(123px);
+  opacity: 1; /* Początkowa wartość przezroczystości */
+  animation-name: fade1; /* Nazwa animacji */
+  animation-duration: 35s; /* Czas trwania animacji */
+  animation-timing-function: ease-in-out; /* Funkcja czasu animacji */
+  animation-iteration-count: infinite; /* Liczba powtórzeń animacji (w tym przypadku nieskończoność) */
+}
+
 
 .lightblue__gradient {
   background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #5a56bf 100%);
@@ -368,3 +403,88 @@ canvas {
 }
 
 /**************************/
+.preloader{
+  height: 100vh;
+  width: 100%;
+  background: #000;
+  color: #FFF;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 55;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+.preloader .texts-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  width: 350px;
+  font-size: 20px;
+  font-weight: 800;
+  overflow: hidden;
+  color: #FFF;
+}
+
+
+/* NotFoundPage.css */
+@keyframes moveUpDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-50px);
+  }
+}
+
+.hr-gradient {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 48%,
+    rgba(255, 255, 255, 0.8) 5%,
+    transparent 100%
+  );
+  height: 4px;
+  margin-bottom: 10px;
+}
+
+.text-404 {
+  font-family: "Poppins";
+  font-weight: 800;
+  font-size: 100.89px;
+  line-height: 43.16px;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -100px;
+  flex-direction: row;
+}
+
+.digit {
+  position: relative;
+  animation: moveUpDown 10.0s infinite;
+}
+
+.digit-4 {
+  animation-delay: -1.0s;
+}
+
+.digit-0 {
+  animation-delay: -1.5s;
+}
+
+/* Aktualizacja odległości między cyframi */
+.text-404 span {
+  margin: -1000px 10px; /* Dostosuj wartość marginesu według potrzeb */
+}

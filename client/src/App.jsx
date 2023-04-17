@@ -1,14 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Navbar, Footer, HomePage, LoginPage, WalletPage, NotFoundPage } from './components';
-import styles from "./style";
-import PreLoader from "./components/PreLoader"; 
-import { metaMask } from './components';
-import { MetaMaskProvider } from './components/metaMask'
-import Web3 from 'web3'; // Dodaj import Web3 z biblioteki web3
-import { Web3ReactProvider, useWeb3React } from '@web3-react/core'
+import { MetaMaskProvider } from './hooks/metaMask'
+import Web3 from 'web3';
+import { Web3ReactProvider } from '@web3-react/core'
+import { HomePage, LoginPage, WalletPage, NotFoundPage } from './pages';
 
-function getLibrary(provider, connector) {
+function getLibrary(provider) {
   return new Web3(provider)
 }
 
@@ -28,8 +25,6 @@ const App = () => {
       </BrowserRouter>
       </MetaMaskProvider>
       </Web3ReactProvider>
-
-
     </div>
   );
 };

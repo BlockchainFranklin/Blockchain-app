@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
-import { injected } from '../components/'
+import { injected } from '../hooks'
 import { useWeb3React } from '@web3-react/core';
 
 export const MetaMaskContext = React.createContext(null)
@@ -7,13 +7,10 @@ export const MetaMaskContext = React.createContext(null)
 export const MetaMaskProvider = ({ children }) => {
 
     const { activate, account, library, connector, active, deactivate } = useWeb3React()
-
     const [isActive, setIsActive] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
     // Init Loading
-    
-
     const handleIsActive = useCallback(() => {
         setIsActive(active)
     }, [active])
@@ -33,7 +30,6 @@ export const MetaMaskProvider = ({ children }) => {
             console.log('Error on connecting: ', error)
         }
     }
-
     const connect_no_refresh = async () => {
         console.log('Connecting to MetaMask Wallet')
         try {
@@ -43,7 +39,6 @@ export const MetaMaskProvider = ({ children }) => {
             console.log('Error on connecting: ', error)
         }
     }
-
     // Disconnect from Metamask wallet
     const disconnect = async () => {
         console.log('Deactivating...')
@@ -53,7 +48,6 @@ export const MetaMaskProvider = ({ children }) => {
             console.log('Error on disconnecting: ', error)
         }
     }
-
     const values = useMemo(
         () => ({
             isActive,
@@ -65,13 +59,11 @@ export const MetaMaskProvider = ({ children }) => {
         }),
         [isActive, isLoading]
     )
-
     return <MetaMaskContext.Provider value={values}>{children}</MetaMaskContext.Provider>
 }
 
 export default function metaMask() {
     const context = React.useContext(MetaMaskContext)
-
     if (context === undefined) {
         throw new Error('metaMask hook must be used with a MetaMaskProvider component')
     }
