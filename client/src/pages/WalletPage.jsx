@@ -5,12 +5,6 @@ import { Navbar, Footer } from '../components'
 import Web3 from 'web3'
 import { metaMask } from '../hooks';
 
-import moment from "moment/moment";
-import { BiSearch } from "react-icons/bi";
-import Sidebar from "../Sidebar/Sidebar";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-
-
 const WalletPage = () => {
 
   const { isActive, account, connect, connect_no_refresh } = metaMask();
@@ -65,170 +59,13 @@ const WalletPage = () => {
   return (
     <div className="bg-primary w-full">
 
-
-    <style>
-    {`
-    .container {
-      display: flex;
-    }
-    
-    .dashboard {
-      position: relative;
-      width: 100%;
-      z-index: 0;
-    }
-    
-    .topBaseGradients {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 20rem;
-      overflow: hidden;
-      z-index: -1;
-    }
-    
-    .topBaseGradients>:nth-child(2)
-    {
-        left: 40%;
-    }
-    .topBaseGradients>:nth-child(3)
-    {
-        right: 0;
-    }
-    .header{
-        display: flex;
-        padding: 2rem 4rem;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .header>:nth-child(1)
-    {
-        font-size: 1.2rem;
-    }
-    .searchBar{
-        background-color: rgba(255, 255, 255, 0.496);
-        width: 30%;
-        max-width: 25rem;
-        padding: 1rem 1rem;
-        border-radius: 8px;
-        height: 2rem;
-        display: flex;
-        align-items: center;
-        border: 2px solid rgb(63, 63, 63);
-        justify-content: center;
-        gap: 8px;
-    }
-    
-    .searchBar>input{
-        background: transparent;
-        color: white;
-        outline: none;
-        border: none;
-        padding: 0;width: 100%;
-    }
-    .profile{
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .profile>img{
-        height: 50px;
-        width: 50px;
-    }
-    .details{
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .details>:nth-child(1)
-    {
-        font-size: 1rem;
-        font-weight: bold;
-    }
-    .content{
-        margin: auto;
-        display: flex;
-        height: 100%;
-        /* align-items: center; */
-        /* uncomment the aic, and make mt -4rem */
-        margin-top: 4rem;
-    }
-    .content>div{
-        width: 100%;
-        min-width: 75vh
-    }
-    
-    `}
-    </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <div className={`sticky top-0 ${styles.paddingX} ${styles.flexCenter} bg-black`} style={{ zIndex: 9999 }}>
-        <div className={`${styles.boxWidth} `}>      
-          <Navbar type="navbar2" />
-        </div>
-      </div>
-
-      
-
-      <div className={css.container}>
-      <Sidebar />
-
-
-      {/* making the dashboard as the default route */}
-      {pathname === "/" && <Navigate to="/dashboard" />}
-
-
-      <div className={css.dashboard}>
-        <div className={css.topBaseGradients}>
-          <div className="gradient-red"></div>
-          <div className="gradient-orange"></div>
-          <div className="gradient-blue"></div>
-        </div>
-
-        <div className={css.header}>
-
-          <span>{moment().format("dddd, Do MMM YYYY")}</span>
-
-          <div className={css.searchBar}>
-            <BiSearch size={20} />
-            <input type="text" placeholder="Search" />
-          </div>
-
-          <div className={css.profile}>
-            <img src="./profile.png" alt="person image" />
-            <div className={css.details}>
-              <span>Denis Steven</span>
-              <span>devissteven@gmail.com</span>
-            </div>
-          </div>
-
-
-        </div>
-
-
-        <div className={css.content}>
-          <Outlet />
-        </div>
+      <div className={`sticky top-0 ${styles.paddingX} ${styles.flexCenter} bg-navbar`} style={{ zIndex: 9999 }}>
+      <div className={`${styles.boxWidth} `}>      
+        <Navbar type="navbar2" />
       </div>
     </div>
 
-
-      {/*
+      
       <div className={` center`}>     
         <div className="flex flex-row justify-between items-center w-full">
           <h1 className="flex-1 font-poppins font-semibold ss:text-[72px] text-[52px]
@@ -249,7 +86,7 @@ const WalletPage = () => {
           </h1>   
         </div>
       </div>
-      */}
+      
 
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>

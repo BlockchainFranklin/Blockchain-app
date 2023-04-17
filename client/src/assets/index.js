@@ -29,6 +29,7 @@ import milosz from "./milosz.jpg";
 import phantom from "./phantom.png"; 
 import metamask from "./metamask.png";
 import hole from "./hole.jpg";
+import chainFit from "./chainFit.png";
 
 export {
   airbnb,
@@ -62,4 +63,5 @@ export {
   phantom,
   metamask,
   hole,
+  chainFit,
 };

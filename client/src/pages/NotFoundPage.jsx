@@ -12,6 +12,7 @@ const NotFoundPage = () => {
   return (
     <section
       id="login"
+
       style={{
         minHeight: "100vh",
         display: "flex",

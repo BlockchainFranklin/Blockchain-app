@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { close, logo, menu } from '../assets'; 
+import { close, chainFit, menu } from '../assets'; 
 import { navLinks, buttonText } from '../constants';        
 import { useReadingProgress } from '../hooks'   
 
@@ -9,8 +9,8 @@ const Navbar = ({ type }) => {
   const completion = useReadingProgress();
 
   return (
-    <nav className="w-full flex py-6 justify-between items-center top-0 " >
-      <img src={logo} alt="chainfit" className="w-[100px] h-[65px]" />
+    <nav className="w-full flex py-6 justify-between items-center top-0 ">
+      <img src={chainFit} alt="chainfit" className="w-[100px] h-[65px]" />
         {type === 'navbar' && (
         <div>
           <ul className="list-none sm:flex hidden justify-end items-center flex-1">
