@@ -156,6 +156,13 @@ interface ChainFitInterface {
 
 contract ChainFit is ChainFitInterface {
 
+    address public chainFitToken;
+
+    constructor(){
+        chainFitToken = new ChainFitToken();
+    }
+
+
     ///////////////////////////////////////////////////////////////////
     //////////                                               //////////
     //////////                  MODIFIERS                    //////////
@@ -259,8 +266,8 @@ contract ChainFit is ChainFitInterface {
     function checkVisit(uint visitId) external payable override ownVisit(visitId) returns(Result result){
         require(gymVisits[visitId].result == Result.InProgress, "This visit has already rated");
         bool inTimeToRate = checkVisitRatingTimeNotExceed(visitId);
-        if(){
-            Negative_pickTimeOut
+        if(!inTimeToRate){
+            return Result.Negative_pickTimeOut;
         }
         else if(!(checkVisitRatesCount(visitId) && checkVisitRatesSocialmediaCount(visitId))){
             if(inTimeToRate) return Result.InProgress;
@@ -284,8 +291,8 @@ contract ChainFit is ChainFitInterface {
             }
         }
         else {
-            STATUS = SUCCESS
-            PAY TOKEN
+            gymVisits[visitId].result = Result.Positive;
+            chainFitToken.mint(gymVisits[visitId].user.getAddress());
         }
     }
 
@@ -535,8 +542,12 @@ import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract ChainFitToken is ERC20, ERC20Burnable, ERC20Snapshot, Ownable, Pausable, ERC20Permit, ERC20Votes {
+
+    address internal chainFitContract;
+
     constructor() ERC20("ChainFitToken", "CFT") ERC20Permit("ChainFitToken") {
         _mint(msg.sender, 256000000 * 10 ** decimals());
+        chainFitContract = msg.sender;
     }
 
     function snapshot() public onlyOwner {
@@ -572,6 +583,7 @@ contract ChainFitToken is ERC20, ERC20Burnable, ERC20Snapshot, Ownable, Pausable
         internal
         override(ERC20, ERC20Votes)
     {
+        require(chainFitContract == msg.sender);
         super._mint(to, amount);
     }
 
