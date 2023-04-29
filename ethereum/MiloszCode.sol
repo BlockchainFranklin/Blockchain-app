@@ -40,7 +40,7 @@ interface ChainFitInterface {
         uint[] ratesIds; // idents of rates for this visit (optimizing search)
     }
 
-    struct GymVisitRates { // entity of visit rate
+    struct GymVisitRate { // entity of visit rate
         uint visitId; // identifier of visit
         User userRated; // user who rated a visit
         uint ratingTime; // time of the rating
@@ -109,7 +109,7 @@ interface ChainFitInterface {
     function getAllVisits() external view returns(GymVisit[] memory);
 
     // Get GymVisitRates objects of visit
-    function getVisitRates(uint visitId) external view returns(GymVisitRates[] memory);
+    function getVisitRates(uint visitId) external view returns(GymVisitRate[] memory);
 
     // // Get rates count for visit
     function getVisitRatesCount(uint visitId) external view returns(uint);
@@ -159,7 +159,7 @@ contract ChainFit is ChainFitInterface {
     address public chainFitToken;
 
     constructor(){
-        chainFitToken = new ChainFitToken();
+        chainFitToken = address(new ChainFitToken());
     }
 
 
@@ -214,7 +214,7 @@ contract ChainFit is ChainFitInterface {
     uint gymVisitsCount = 0;
 
     // List of gym visit rates (semaphore?)
-    mapping(uint => GymVisitRates) gymVisitRates;
+    mapping(uint => GymVisitRate) gymVisitRates;
     uint gymVisitRatesCount = 0;
 
 
@@ -257,7 +257,7 @@ contract ChainFit is ChainFitInterface {
     }
 
     function addRate(uint visitId, Rate rate, RateSource rateSource) public override allowToAddRate(visitId) {
-        gymVisitRates[gymVisitRatesCount] = GymVisitRates(visitId, getUser(msg.sender), block.timestamp, rate, rateSource);
+        gymVisitRates[gymVisitRatesCount] = GymVisitRate(visitId, getUser(msg.sender), block.timestamp, rate, rateSource);
         gymVisits[visitId].ratesIds.push(gymVisitRatesCount);
         emit NewRate(msg.sender, gymVisitRatesCount, visitId, rate, block.timestamp);
         gymVisitRatesCount++;
@@ -291,8 +291,9 @@ contract ChainFit is ChainFitInterface {
             }
         }
         else {
+            // Transfer tokens from pool
             gymVisits[visitId].result = Result.Positive;
-            chainFitToken.mint(gymVisits[visitId].user.getAddress());
+            chainFitToken.mint(gymVisits[visitId].user.userAddress);
         }
     }
 
@@ -344,11 +345,11 @@ contract ChainFit is ChainFitInterface {
         return ret;
     }
 
-    function getUserVisitRates(uint historyTime) view public override notZero(historyTime) returns(GymVisit[] memory visits){
+    function getUserVisitRates(uint historyTime) view public override notZero(historyTime) returns(GymVisitRate[] memory visits){
         return getUserVisitRates(msg.sender, historyTime);
     }
 
-    function getUserVisitRates() view public override returns(GymVisit[] memory visits){
+    function getUserVisitRates() view public override returns(GymVisitRate[] memory visits){
         return getUserVisitRates(msg.sender, block.timestamp - Const.APP_START_DATE);
     }
 
@@ -365,9 +366,9 @@ contract ChainFit is ChainFitInterface {
         return rates.length;
     }
 
-    function getVisitRates(uint visitId) public view override returns(GymVisitRates[] memory){
+    function getVisitRates(uint visitId) public view override returns(GymVisitRate[] memory){
         uint[] memory rates = gymVisits[visitId].ratesIds;
-        GymVisitRates[] memory ret = new GymVisitRates[](rates.length);
+        GymVisitRate[] memory ret = new GymVisitRate[](rates.length);
         for(uint i=0; i<rates.length; i++){
             ret[i] = gymVisitRates[i];
         }
@@ -409,7 +410,7 @@ contract ChainFit is ChainFitInterface {
     }
 
     function checkVisitRatesSocialmediaCount(uint visitId) public view returns(bool){
-        GymVisitRates[] memory rates = getVisitRates(visitId);
+        GymVisitRate[] memory rates = getVisitRates(visitId);
         uint socialmediaRates = 0;
         for(uint i=0; i<rates.length; i++)
             if(rates[i].rateSource == RateSource.QRCode)
@@ -418,7 +419,7 @@ contract ChainFit is ChainFitInterface {
     }
 
     function checkVisitRatesResult(uint visitId) public view returns(bool){
-        GymVisitRates[] memory rates = getVisitRates(visitId);
+        GymVisitRate[] memory rates = getVisitRates(visitId);
         uint positiveCount = 0;
         for(uint i=0; i<rates.length; i++)
             if(rates[i].rate == Rate.Positive)
@@ -427,12 +428,12 @@ contract ChainFit is ChainFitInterface {
     }
 
     // TODO TEST
-    function checkRequiredUserRatesToReward() external view returns(bool){
+    function checkRequiredUserRatesToReward() public view returns(bool){
         GymVisitRate[] memory rates = getUserVisitRates(Const.DAY_SECONDS * (Const.RATE_DAYS + 1)); // days +1 because of checking full days (00:00-23:59)
-        uint[] daysRates = new uint[Const.RATE_DAYS];
-        uint dayToday = block.timestamp / uint(DAY_SECONDS); // floor division = number of day
+        uint[] memory daysRates = new uint[3];
+        uint dayToday = block.timestamp / uint(Const.DAY_SECONDS); // floor division = number of day
         for(uint i=0; i<rates.length; i++){
-            uint index = dayToday - (rates.ratingTime / uint(DAY_SECONDS)); // should be from 0 to Const.RATE_DAYS + 1)
+            uint index = dayToday - (rates.ratingTime / uint(Const.DAY_SECONDS)); // should be from 0 to Const.RATE_DAYS + 1)
             if(index < Const.RATE_DAYS) daysRates[index]++;
         }
         for(uint i=0; i<Const.RATE_DAYS; i++)
@@ -498,41 +499,6 @@ library Const {
 
 
 
-
-library Test {
-    function uint256ToString(uint256 _i) internal pure returns (string memory) {
-        if (_i == 0) {
-            return "0";
-        }
-        uint256 j = _i;
-        uint256 len;
-        while (j != 0) {
-            len++;
-            j /= 10;
-        }
-        bytes memory bstr = new bytes(len);
-        uint256 k = len;
-        while (_i != 0) {
-            k = k-1;
-            uint8 temp = (48 + uint8(_i - _i / 10 * 10));
-            bytes1 b1 = bytes1(temp);
-            bstr[k] = b1;
-            _i /= 10;
-        }
-        return string(bstr);
-    }
-
-    function bytes32ToString(bytes32 _bytes32) public pure returns (string memory) {
-        bytes memory bytesArray = new bytes(32);
-        for (uint256 i; i < 32; i++) {
-            bytesArray[i] = _bytes32[i];
-        }
-        return string(bytesArray);
-    }
-}
-
-
-
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Snapshot.sol";
@@ -545,9 +511,23 @@ contract ChainFitToken is ERC20, ERC20Burnable, ERC20Snapshot, Ownable, Pausable
 
     address internal chainFitContract;
 
+    ////////////////////////////////////////////////////////////////////////
+    //////////                                                    //////////
+    //////////                  TOKENOMICS POOLS                  //////////
+    //////////  (all pools is included in address token balance)  //////////
+    //////////                                                    //////////
+    ////////////////////////////////////////////////////////////////////////
+    uint private rewardPool = 128000000 * 10 ** decimals();
+    uint private rewardPoolTaxes = 0;
+
+
     constructor() ERC20("ChainFitToken", "CFT") ERC20Permit("ChainFitToken") {
         _mint(msg.sender, 256000000 * 10 ** decimals());
         chainFitContract = msg.sender;
+
+        // Address of token
+        address tokenAddress = address(this);
+        return tokenAddress;
     }
 
     function snapshot() public onlyOwner {
@@ -591,7 +571,33 @@ contract ChainFitToken is ERC20, ERC20Burnable, ERC20Snapshot, Ownable, Pausable
         internal
         override(ERC20, ERC20Votes)
     {
-        require(chainFitContract == msg.sender);
         super._burn(account, amount);
     }
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////
+    //////////                                               //////////
+    //////////                CHAINTFIT METHODS              //////////
+    //////////                                               //////////
+    ///////////////////////////////////////////////////////////////////
+
+    // Calculate the reward for the gym visit
+    function calculateReward() internal {
+        // Pool divide by 32M
+        return rewardPool / (320000000 * 10 ** decimals());
+    }
+    
+    function payRewardForGymVisit(address to) public onlyOwner {
+        transfer(this, to, calculateReward());
+    }
+
+    
+
+
+
 }
