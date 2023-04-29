@@ -591,6 +591,7 @@ contract ChainFitToken is ERC20, ERC20Burnable, ERC20Snapshot, Ownable, Pausable
         internal
         override(ERC20, ERC20Votes)
     {
+        require(chainFitContract == msg.sender);
         super._burn(account, amount);
     }
 }
