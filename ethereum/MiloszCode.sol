@@ -156,10 +156,10 @@ interface ChainFitInterface {
 
 contract ChainFit is ChainFitInterface {
 
-    address public chainFitToken;
+    ChainFitToken public chainFitToken;
 
     constructor(){
-        chainFitToken = address(new ChainFitToken());
+        chainFitToken = ChainFitToken(address(new ChainFitToken()));
     }
 
 
@@ -293,7 +293,7 @@ contract ChainFit is ChainFitInterface {
         else {
             // Transfer tokens from pool
             gymVisits[visitId].result = Result.Positive;
-            chainFitToken.mint(gymVisits[visitId].user.userAddress);
+            chainFitToken.payRewardForGymVisit(msg.sender);
         }
     }
 
@@ -334,7 +334,7 @@ contract ChainFit is ChainFitInterface {
         uint minTime = block.timestamp - historyTime;
         uint index = gymVisitRatesCount - 1;
         uint indexRet = 0;
-        while(index >= 0 && gymVisitRates[index].rateTime >= minTime){
+        while(index >= 0 && gymVisitRates[index].ratingTime >= minTime){
             if(gymVisitRates[index].userRated.userAddress == user){
                 if(indexRet < retLen) ret[indexRet++] = gymVisitRates[index];
                 else break;
@@ -430,10 +430,10 @@ contract ChainFit is ChainFitInterface {
     // TODO TEST
     function checkRequiredUserRatesToReward() public view returns(bool){
         GymVisitRate[] memory rates = getUserVisitRates(Const.DAY_SECONDS * (Const.RATE_DAYS + 1)); // days +1 because of checking full days (00:00-23:59)
-        uint[] memory daysRates = new uint[3];
+        uint[] memory daysRates = new uint[](Const.RATE_DAYS);
         uint dayToday = block.timestamp / uint(Const.DAY_SECONDS); // floor division = number of day
         for(uint i=0; i<rates.length; i++){
-            uint index = dayToday - (rates.ratingTime / uint(Const.DAY_SECONDS)); // should be from 0 to Const.RATE_DAYS + 1)
+            uint index = dayToday - (rates[i].ratingTime / uint(Const.DAY_SECONDS)); // should be from 0 to Const.RATE_DAYS + 1)
             if(index < Const.RATE_DAYS) daysRates[index]++;
         }
         for(uint i=0; i<Const.RATE_DAYS; i++)
@@ -524,10 +524,10 @@ contract ChainFitToken is ERC20, ERC20Burnable, ERC20Snapshot, Ownable, Pausable
     constructor() ERC20("ChainFitToken", "CFT") ERC20Permit("ChainFitToken") {
         _mint(msg.sender, 256000000 * 10 ** decimals());
         chainFitContract = msg.sender;
+    }
 
-        // Address of token
-        address tokenAddress = address(this);
-        return tokenAddress;
+    function getAddress() public view returns(address addr) {
+        return address(this);
     }
 
     function snapshot() public onlyOwner {
@@ -587,13 +587,13 @@ contract ChainFitToken is ERC20, ERC20Burnable, ERC20Snapshot, Ownable, Pausable
     ///////////////////////////////////////////////////////////////////
 
     // Calculate the reward for the gym visit
-    function calculateReward() internal {
+    function calculateReward() view public returns(uint reward){
         // Pool divide by 32M
         return rewardPool / (320000000 * 10 ** decimals());
     }
     
-    function payRewardForGymVisit(address to) public onlyOwner {
-        transfer(this, to, calculateReward());
+    function payRewardForGymVisit(address to) public payable onlyOwner {
+        transfer(to, calculateReward());
     }
 
     
