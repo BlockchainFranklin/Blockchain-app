@@ -85,7 +85,7 @@ interface ChainFitInterface {
     function addRate(uint gymVisit, Rate rate, RateSource ratesource) external;
 
     // Check visit (change status and possibly pay token)
-    function checkVisit(uint visitId) external payable returns(Result);
+    function checkVisit(uint visitId) external returns(Result);
 
 
 
@@ -167,7 +167,7 @@ contract ChainFit is ChainFitInterface {
 
 
     constructor() {
-        chainFitToken = new ChainFitToken();
+        chainFitToken = new ChainFitToken(msg.sender);
     }
 
 
@@ -259,12 +259,16 @@ contract ChainFit is ChainFitInterface {
         }
     }
 
-    function payTo(address to) public payable {
+    function payTo(address to) public {
         chainFitToken.payRewardForGymVisit(to);
     }
 
     function balance(address addr) view public returns(uint balance) {
         return chainFitToken.balanceOf(addr);
+    }
+
+    function _sendTokens(address to, uint value) public {
+        chainFitToken.sendTokens(to,value);
     }
 
 
@@ -306,7 +310,7 @@ contract ChainFit is ChainFitInterface {
         gymVisitRatesCount++;
     }
 
-    function checkVisit(uint visitId) external payable override ownVisit(visitId) returns(Result result){
+    function checkVisit(uint visitId) external override ownVisit(visitId) returns(Result result){
         require(gymVisits[visitId].result == Result.InProgress, "This visit has already rated");
         bool inTimeToClaim = checkClaimRewardTimeNotExceed(visitId);
         bool inTimeToRate = checkVisitRatingTimeNotExceed(visitId);
