@@ -1,6 +1,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/math/Math.sol";
+import "./Token.sol";
 
 interface ChainFitInterface {
 
@@ -17,10 +18,10 @@ interface ChainFitInterface {
     enum Result { // result of social photo verification
         Positive, // 0 - visit accepted, token assigned
         InProgress, // 1 - didn't verified yet
-        Negative_insufficientRates, // 2 - didn't get 10 rates or 5 social media rates in 3 days
-        Negative_ratesNegative, // 3 - rates were negative (need >= 90%)
-        Negative_insufficientUserRates, // 4 - user didn't give atleast 5 rates per day since 3 days
-        Negative_pickTimeOut, // 5 - out of time to check visit (default 4 days)
+        Negative_insufficientRates, // 2 - didn't get Const.RATES_REQUIRE or Const.RATES_SOCIALMEDIA_REQUIRE in Const.RATE_DAYS 
+        Negative_ratesNegative, // 3 - rates were negative (need >= Const.POSITIVE_RATES_PERCENT %)
+        Negative_insufficientUserRates, // 4 - user didn't give atleast Const.DAILY_RATES_REQUIRED rates per day since Const.RATE_DAYS
+        Negative_pickTimeOut, // 5 - out of time to check visit (default Const.RATE_DAYS)
         Contested, // 6 - user reported negative verification (only after Result.Negative_ratesNegative)
         Negative_afterContested // 7 - negative reclamation verification
     }
@@ -114,20 +115,23 @@ interface ChainFitInterface {
     // // Get rates count for visit
     function getVisitRatesCount(uint visitId) external view returns(uint);
 
-    // Get user visit rates (defualt week)
+    // Get user visit rates
     function getUserVisitRates(address user, uint historyTime) external view returns(GymVisitRate[] memory);
     function getUserVisitRates(uint historyTime) external view returns(GymVisitRate[] memory);
     function getUserVisitRates() external view returns(GymVisitRate[] memory);
 
 
-    // Check last visit time (one per 8h)
+    // Check last visit time
     function checkLastVisitTime() external view returns(bool);
 
-    // Check week visits limit (3 per week)
+    // Check week visits limit
     function checkWeekVisitLimit() external view returns(bool);
 
-    // Check visits time (3 days)
+    // Check visit rating time
     function checkVisitRatingTimeNotExceed(uint visitId) external view returns(bool);
+
+    // Check claim reward time
+    function checkClaimRewardTimeNotExceed(uint visitId) external view returns(bool);
 
 
     // Check is visit still in "in progress" result
@@ -142,11 +146,14 @@ interface ChainFitInterface {
     // Check visit rates count from social media (to check reward)
     function checkVisitRatesSocialmediaCount(uint visitId) external view returns(bool);
 
-    // Check positive rates percent (require +90%)
+    // Check positive rates percent
     function checkVisitRatesResult(uint visitId) external view returns(bool);
 
     // Check required number of ratings to reward
     function checkRequiredUserRatesToReward() external view returns(bool);
+
+    // Check user rated visit
+    function checkRated(address user, uint visitId) external view returns(bool);
 }
 
 
@@ -158,10 +165,27 @@ contract ChainFit is ChainFitInterface {
 
     ChainFitToken public chainFitToken;
 
-    constructor(){
-        chainFitToken = ChainFitToken(address(new ChainFitToken()));
+
+    constructor() {
+        chainFitToken = new ChainFitToken();
     }
 
+
+    ///////////////////////////////////////////////////////////////////
+    //////////                                               //////////
+    //////////                     DATA                      //////////
+    //////////                                               //////////
+    ///////////////////////////////////////////////////////////////////
+
+    // List of gym visits
+    mapping(uint => GymVisit) gymVisits;
+    uint gymVisitsCount = 0;
+
+    // List of gym visit rates
+    mapping(uint => GymVisitRate) gymVisitRates;
+    uint gymVisitRatesCount = 0;
+
+    
 
     ///////////////////////////////////////////////////////////////////
     //////////                                               //////////
@@ -188,6 +212,9 @@ contract ChainFit is ChainFitInterface {
     modifier allowToAddRate(uint visitId){
         require(isOwnVisit(visitId) == false, "You cannot rate own visit");
         require(checkVisitInProgress(visitId), "Visit was rated or time exceed");
+        require(checkVisitRatingTimeNotExceed(visitId), "Time to rate visit is over");
+        require(getUserVisitRates(Const.DAY_SECONDS).length <= Const.MAX_DAILY_RATES, "Reached daily rate limit");
+        require(checkRated(msg.sender, visitId) == false, "You rated this visit");
         _;
     }
 
@@ -205,19 +232,40 @@ contract ChainFit is ChainFitInterface {
 
     ///////////////////////////////////////////////////////////////////
     //////////                                               //////////
-    //////////                     DATA                      //////////
+    //////////                      TEST                     //////////
     //////////                                               //////////
     ///////////////////////////////////////////////////////////////////
 
-    // List of gym visits (semaphore?)
-    mapping(uint => GymVisit) gymVisits;
-    uint gymVisitsCount = 0;
 
-    // List of gym visit rates (semaphore?)
-    mapping(uint => GymVisitRate) gymVisitRates;
-    uint gymVisitRatesCount = 0;
+    function _insertSampleData() public {
+        uint timeNow = block.timestamp;
+        uint yesterday = timeNow - Const.DAY_SECONDS;
+        uint twoDaysAgo = yesterday - Const.DAY_SECONDS;
+        uint threeDaysAgo = twoDaysAgo - Const.DAY_SECONDS;
+        uint weekAgo = block.timestamp - Const.WEEK_SECONDS;
 
+        gymVisits[gymVisitsCount] = GymVisit(gymVisitsCount, getUser(address(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4)), threeDaysAgo, 0, 0, "", Result.InProgress, new uint[](0));
+        gymVisitsCount++;
 
+        for(uint i=0; i<6; i++) {
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(0, getUser(msg.sender), block.timestamp, Rate.Positive, RateSource.App);
+            gymVisits[0].ratesIds.push(gymVisitRatesCount);
+            gymVisitRatesCount++;
+        }
+        for(uint i=0; i<6; i++) {
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(0, getUser(msg.sender), block.timestamp, Rate.Positive, RateSource.QRCode);
+            gymVisits[0].ratesIds.push(gymVisitRatesCount);
+            gymVisitRatesCount++;
+        }
+    }
+
+    function payTo(address to) public payable {
+        chainFitToken.payRewardForGymVisit(to);
+    }
+
+    function balance(address addr) view public returns(uint balance) {
+        return chainFitToken.balanceOf(addr);
+    }
 
 
 
@@ -228,11 +276,6 @@ contract ChainFit is ChainFitInterface {
     //////////                                               //////////
     ///////////////////////////////////////////////////////////////////
 
-    function insertSampleData() public {
-        for(uint i=0; i<10; i++){
-            addVisit(/*przykladowy hash*/ "asdfghjkl");
-        }
-    }
 
     function getUser(address userAddress) public pure returns(User memory user){
         return User(userAddress);
@@ -265,8 +308,10 @@ contract ChainFit is ChainFitInterface {
 
     function checkVisit(uint visitId) external payable override ownVisit(visitId) returns(Result result){
         require(gymVisits[visitId].result == Result.InProgress, "This visit has already rated");
+        bool inTimeToClaim = checkClaimRewardTimeNotExceed(visitId);
         bool inTimeToRate = checkVisitRatingTimeNotExceed(visitId);
-        if(!inTimeToRate){
+
+        if(!inTimeToClaim){
             return Result.Negative_pickTimeOut;
         }
         else if(!(checkVisitRatesCount(visitId) && checkVisitRatesSocialmediaCount(visitId))){
@@ -329,20 +374,27 @@ contract ChainFit is ChainFitInterface {
     
     function getUserVisitRates(address user, uint historyTime) notZero(historyTime) public view returns(GymVisitRate[] memory){
         if(gymVisitRatesCount == 0) return new GymVisitRate[](0);
-        uint retLen = getMaxCountRatesForTime(historyTime);
-        GymVisitRate[] memory ret = new GymVisitRate[](retLen);
+
         uint minTime = block.timestamp - historyTime;
-        uint index = gymVisitRatesCount - 1;
-        uint indexRet = 0;
-        while(index >= 0 && gymVisitRates[index].ratingTime >= minTime){
-            if(gymVisitRates[index].userRated.userAddress == user){
-                if(indexRet < retLen) ret[indexRet++] = gymVisitRates[index];
-                else break;
+        uint userVisitRatesCount = 0;
+
+        // Count the number of gym visit rates for the given user that meet the historyTime criteria
+        for (uint i = 0; i < gymVisitRatesCount; i++) {
+            if (gymVisitRates[i].userRated.userAddress == user && gymVisitRates[i].ratingTime >= minTime) {
+                userVisitRatesCount++;
             }
-            if(index == 0) break;
-            else index--;
         }
-        return ret;
+
+        GymVisitRate[] memory userVisitRates = new GymVisitRate[](userVisitRatesCount);
+        uint userVisitRatesIndex = 0;
+
+        for (uint i = 0; i < gymVisitRatesCount; i++) {
+            if (gymVisitRates[i].userRated.userAddress == user && gymVisitRates[i].ratingTime >= historyTime) {
+                userVisitRates[userVisitRatesIndex] = gymVisitRates[i];
+                userVisitRatesIndex++;
+            }
+        }
+        return userVisitRates;
     }
 
     function getUserVisitRates(uint historyTime) view public override notZero(historyTime) returns(GymVisitRate[] memory visits){
@@ -396,6 +448,10 @@ contract ChainFit is ChainFitInterface {
         return gymVisits[visitId].visitTime + Const.RATE_TIME >= block.timestamp;
     }
 
+    function checkClaimRewardTimeNotExceed(uint visitId) public view override returns(bool){
+        return gymVisits[visitId].visitTime + Const.CLAIN_REWARD_TIME >= block.timestamp;
+    }
+
     function checkVisitInProgress(uint visitId) public view override returns(bool){
         if(checkVisitRatingTimeNotExceed(visitId) == false) return false;
         else return gymVisits[visitId].result == Result.InProgress;
@@ -427,6 +483,14 @@ contract ChainFit is ChainFitInterface {
         return positiveCount * 100 / rates.length >= Const.POSITIVE_RATES_PERCENT;
     }
 
+    function checkRated(address user, uint visitId) public view returns(bool){
+        for(uint i=0; i<gymVisitRatesCount; i++){
+            if(gymVisitRates[i].visitId == visitId && gymVisitRates[i].userRated.userAddress == user)
+                return true;
+        }
+        return false;
+    }
+
     // TODO TEST
     function checkRequiredUserRatesToReward() public view returns(bool){
         GymVisitRate[] memory rates = getUserVisitRates(Const.DAY_SECONDS * (Const.RATE_DAYS + 1)); // days +1 because of checking full days (00:00-23:59)
@@ -437,10 +501,14 @@ contract ChainFit is ChainFitInterface {
             if(index < Const.RATE_DAYS) daysRates[index]++;
         }
         for(uint i=0; i<Const.RATE_DAYS; i++)
-            if(daysRates[i] < 5)
+            if(daysRates[i] < Const.DAILY_RATES_REQUIRED)
                 return false;
         return true;
     }
+
+
+
+
 
 
 
@@ -457,14 +525,10 @@ contract ChainFit is ChainFitInterface {
         return Const.MAX_WEEK_VISITS * Math.ceilDiv(time, Const.WEEK_SECONDS);
     }
 
-    // Max visits for aplied time
-    function getMaxCountRatesForTime(uint time) pure internal returns(uint maxRates){
-        return Const.MAX_DAILY_RATES * Math.ceilDiv(time, Const.DAY_SECONDS);
-    }
-
     function isOwnVisit(uint visitId) view internal returns(bool result){
         return gymVisits[visitId].user.userAddress == msg.sender;
     }
+
 
 }
 
@@ -481,123 +545,24 @@ library Const {
     uint constant MAX_WEEK_VISITS = 3;
     uint constant MAX_DAILY_RATES = 20;
 
+
     uint constant MINIMUM_TIME_BETWEEN_VISITS = 60*60*8; // hours between adding visits
-    uint constant RATE_DAYS = 3; //time to rate a visit
-    uint constant RATE_TIME = DAY_SECONDS * RATE_DAYS; //time to rate a visit
     uint constant RATES_REQUIRE = 10; // rates required to verify a visit
     uint constant RATES_SOCIALMEDIA_REQUIRE = 5; // rates from social media required to verify a visit
     uint constant POSITIVE_RATES_PERCENT = 80; // positive rates percent require to verify a visit
+    uint constant DAILY_RATES_REQUIRED = 5; // daily rates commit needed to recive yield
+
+
+    uint constant RATE_DAYS = 3; //time to rate a visit
+    uint constant RATE_TIME = DAY_SECONDS * RATE_DAYS; //time to rate a visit
+
+    uint constant CLAIN_REWARD_DAYS = 7; // time to claim reward (within time to vote)
+    uint constant CLAIN_REWARD_TIME = CLAIN_REWARD_DAYS * DAY_SECONDS; // time to claim reward (within time to vote)
+
 
     uint constant DAY_SECONDS = 60*60*24;
     uint constant WEEK_SECONDS = DAY_SECONDS * 7;
-
     uint constant MAX_UINT = 2**256 - 1;
     uint constant APP_START_DATE = 1672527600; //2023.01.01
     address constant DEFAULT_ADDRESS = address(0);
-}
-
-
-
-
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Snapshot.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
-
-contract ChainFitToken is ERC20, ERC20Burnable, ERC20Snapshot, Ownable, Pausable, ERC20Permit, ERC20Votes {
-
-    address internal chainFitContract;
-
-    ////////////////////////////////////////////////////////////////////////
-    //////////                                                    //////////
-    //////////                  TOKENOMICS POOLS                  //////////
-    //////////  (all pools is included in address token balance)  //////////
-    //////////                                                    //////////
-    ////////////////////////////////////////////////////////////////////////
-    uint private rewardPool = 128000000 * 10 ** decimals();
-    uint private rewardPoolTaxes = 0;
-
-
-    constructor() ERC20("ChainFitToken", "CFT") ERC20Permit("ChainFitToken") {
-        _mint(msg.sender, 256000000 * 10 ** decimals());
-        chainFitContract = msg.sender;
-    }
-
-    function getAddress() public view returns(address addr) {
-        return address(this);
-    }
-
-    function snapshot() public onlyOwner {
-        _snapshot();
-    }
-
-    function pause() public onlyOwner {
-        _pause();
-    }
-
-    function unpause() public onlyOwner {
-        _unpause();
-    }
-
-    function _beforeTokenTransfer(address from, address to, uint256 amount)
-        internal
-        whenNotPaused
-        override(ERC20, ERC20Snapshot)
-    {
-        super._beforeTokenTransfer(from, to, amount);
-    }
-
-    // The following functions are overrides required by Solidity.
-
-    function _afterTokenTransfer(address from, address to, uint256 amount)
-        internal
-        override(ERC20, ERC20Votes)
-    {
-        super._afterTokenTransfer(from, to, amount);
-    }
-
-    function _mint(address to, uint256 amount)
-        internal
-        override(ERC20, ERC20Votes)
-    {
-        require(chainFitContract == msg.sender);
-        super._mint(to, amount);
-    }
-
-    function _burn(address account, uint256 amount)
-        internal
-        override(ERC20, ERC20Votes)
-    {
-        super._burn(account, amount);
-    }
-
-
-
-
-
-
-
-    ///////////////////////////////////////////////////////////////////
-    //////////                                               //////////
-    //////////                CHAINTFIT METHODS              //////////
-    //////////                                               //////////
-    ///////////////////////////////////////////////////////////////////
-
-    // Calculate the reward for the gym visit
-    function calculateReward() view public returns(uint reward){
-        // Pool divide by 32M
-        return rewardPool / (320000000 * 10 ** decimals());
-    }
-    
-    function payRewardForGymVisit(address to) public payable onlyOwner {
-        transfer(to, calculateReward());
-    }
-
-    
-
-
-
 }
