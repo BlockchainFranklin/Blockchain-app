@@ -32,7 +32,7 @@ interface ChainFitInterface {
 
     struct GymVisit { // entity of visit (with server photo)
         uint visitId; // identifier of visit
-        User user; // user who added a visit
+        address user; // user who added a visit
         uint visitTime; // time of the visit
         uint localizationX; // localization to verify in int value (ex. 52.406333 -> 52406333)
         uint localizationY;
@@ -43,7 +43,7 @@ interface ChainFitInterface {
 
     struct GymVisitRate { // entity of visit rate
         uint visitId; // identifier of visit
-        User userRated; // user who rated a visit
+        address userRated; // user who rated a visit
         uint ratingTime; // time of the rating
         Rate rate; // given rate
         RateSource rateSource; // source of given rate
@@ -219,7 +219,7 @@ contract ChainFit is ChainFitInterface {
     }
 
     modifier ownVisit(uint visitId){
-        require(isOwnVisit(visitId) == true);
+        require(isOwnVisit(visitId));
         _;
     }
 
@@ -244,17 +244,40 @@ contract ChainFit is ChainFitInterface {
         uint threeDaysAgo = twoDaysAgo - Const.DAY_SECONDS;
         uint weekAgo = block.timestamp - Const.WEEK_SECONDS;
 
-        gymVisits[gymVisitsCount] = GymVisit(gymVisitsCount, getUser(address(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4)), threeDaysAgo, 0, 0, "", Result.InProgress, new uint[](0));
+        gymVisits[gymVisitsCount] = GymVisit(gymVisitsCount, msg.sender, threeDaysAgo, 0, 0, "", Result.InProgress, new uint[](0));
         gymVisitsCount++;
 
         for(uint i=0; i<6; i++) {
-            gymVisitRates[gymVisitRatesCount] = GymVisitRate(0, getUser(msg.sender), block.timestamp, Rate.Positive, RateSource.App);
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(0, msg.sender, block.timestamp, Rate.Positive, RateSource.App);
             gymVisits[0].ratesIds.push(gymVisitRatesCount);
             gymVisitRatesCount++;
         }
         for(uint i=0; i<6; i++) {
-            gymVisitRates[gymVisitRatesCount] = GymVisitRate(0, getUser(msg.sender), block.timestamp, Rate.Positive, RateSource.QRCode);
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(0, msg.sender, block.timestamp, Rate.Positive, RateSource.QRCode);
             gymVisits[0].ratesIds.push(gymVisitRatesCount);
+            gymVisitRatesCount++;
+        }
+
+        address a1 = msg.sender;
+
+        for(uint i=0; i<5; i++){
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(1, a1, timeNow, Rate.Positive, RateSource.App);
+            gymVisitRatesCount++;
+        }
+        for(uint i=0; i<5; i++){
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(2, a1, yesterday, Rate.Positive, RateSource.App);
+            gymVisitRatesCount++;
+        }
+        for(uint i=0; i<5; i++){
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(10, a1, twoDaysAgo, Rate.Positive, RateSource.App);
+            gymVisitRatesCount++;
+        }
+        for(uint i=0; i<5; i++){
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(11, a1, threeDaysAgo, Rate.Positive, RateSource.App);
+            gymVisitRatesCount++;
+        }
+        for(uint i=0; i<5; i++){
+            gymVisitRates[gymVisitRatesCount] = GymVisitRate(11, a1, threeDaysAgo+20, Rate.Positive, RateSource.App);
             gymVisitRatesCount++;
         }
     }
@@ -294,7 +317,7 @@ contract ChainFit is ChainFitInterface {
     }
 
     function addVisit(uint localizationX, uint localizationY, string memory hash) public override allowToAddVisit {
-        gymVisits[gymVisitsCount] = GymVisit(gymVisitsCount, getUser(msg.sender), block.timestamp, localizationX, localizationY, hash, Result.InProgress, new uint[](0));
+        gymVisits[gymVisitsCount] = GymVisit(gymVisitsCount, msg.sender, block.timestamp, localizationX, localizationY, hash, Result.InProgress, new uint[](0));
         emit NewVisit(msg.sender, gymVisitsCount, block.timestamp);
         gymVisitsCount++;
     }
@@ -304,7 +327,7 @@ contract ChainFit is ChainFitInterface {
     }
 
     function addRate(uint visitId, Rate rate, RateSource rateSource) public override allowToAddRate(visitId) {
-        gymVisitRates[gymVisitRatesCount] = GymVisitRate(visitId, getUser(msg.sender), block.timestamp, rate, rateSource);
+        gymVisitRates[gymVisitRatesCount] = GymVisitRate(visitId,msg.sender, block.timestamp, rate, rateSource);
         gymVisits[visitId].ratesIds.push(gymVisitRatesCount);
         emit NewRate(msg.sender, gymVisitRatesCount, visitId, rate, block.timestamp);
         gymVisitRatesCount++;
@@ -339,10 +362,11 @@ contract ChainFit is ChainFitInterface {
                 return Result.Negative_insufficientUserRates;
             }
         }
-        else {
+        else{
             // Transfer tokens from pool
             gymVisits[visitId].result = Result.Positive;
-            chainFitToken.payRewardForGymVisit(msg.sender);
+            chainFitToken.payRewardForGymVisit(gymVisits[visitId].user);
+            return Result.Positive;
         }
     }
 
@@ -357,7 +381,7 @@ contract ChainFit is ChainFitInterface {
         uint index = gymVisitsCount - 1;
         uint indexRet = 0;
         while(index >= 0 && gymVisits[index].visitTime >= minTime){
-            if(gymVisits[index].user.userAddress == user){
+            if(gymVisits[index].user == user){
                 if(indexRet < retLen) ret[indexRet++] = gymVisits[index];
                 else break;
             }
@@ -384,7 +408,7 @@ contract ChainFit is ChainFitInterface {
 
         // Count the number of gym visit rates for the given user that meet the historyTime criteria
         for (uint i = 0; i < gymVisitRatesCount; i++) {
-            if (gymVisitRates[i].userRated.userAddress == user && gymVisitRates[i].ratingTime >= minTime) {
+            if (gymVisitRates[i].userRated == user && gymVisitRates[i].ratingTime >= minTime) {
                 userVisitRatesCount++;
             }
         }
@@ -393,7 +417,7 @@ contract ChainFit is ChainFitInterface {
         uint userVisitRatesIndex = 0;
 
         for (uint i = 0; i < gymVisitRatesCount; i++) {
-            if (gymVisitRates[i].userRated.userAddress == user && gymVisitRates[i].ratingTime >= historyTime) {
+            if (gymVisitRates[i].userRated == user && gymVisitRates[i].ratingTime >= historyTime) {
                 userVisitRates[userVisitRatesIndex] = gymVisitRates[i];
                 userVisitRatesIndex++;
             }
@@ -434,7 +458,7 @@ contract ChainFit is ChainFitInterface {
     function checkLastVisitTime() public view override returns(bool){
         GymVisit[] memory visits = getVisits(Const.MINIMUM_TIME_BETWEEN_VISITS);
         for(uint i=0; i<visits.length; i++)
-            if(visits[i].user.userAddress != Const.DEFAULT_ADDRESS)
+            if(visits[i].user != Const.DEFAULT_ADDRESS)
                 return false;
         return true;
     }
@@ -443,7 +467,7 @@ contract ChainFit is ChainFitInterface {
         GymVisit[] memory visits = getVisits(Const.WEEK_SECONDS);
         uint visitCount = 0;
         for(uint i=0; i< visits.length; i++)
-            if(visits[i].user.userAddress != Const.DEFAULT_ADDRESS)
+            if(visits[i].user != Const.DEFAULT_ADDRESS)
                 visitCount++;
         return visitCount < Const.MAX_WEEK_VISITS;
     }
@@ -489,7 +513,7 @@ contract ChainFit is ChainFitInterface {
 
     function checkRated(address user, uint visitId) public view returns(bool){
         for(uint i=0; i<gymVisitRatesCount; i++){
-            if(gymVisitRates[i].visitId == visitId && gymVisitRates[i].userRated.userAddress == user)
+            if(gymVisitRates[i].visitId == visitId && gymVisitRates[i].userRated == user)
                 return true;
         }
         return false;
@@ -497,16 +521,17 @@ contract ChainFit is ChainFitInterface {
 
     // TODO TEST
     function checkRequiredUserRatesToReward() public view returns(bool){
-        GymVisitRate[] memory rates = getUserVisitRates(Const.DAY_SECONDS * (Const.RATE_DAYS + 1)); // days +1 because of checking full days (00:00-23:59)
+        GymVisitRate[] memory rates = getUserVisitRates(Const.RATE_TIME + 60);
         uint[] memory daysRates = new uint[](Const.RATE_DAYS);
-        uint dayToday = block.timestamp / uint(Const.DAY_SECONDS); // floor division = number of day
         for(uint i=0; i<rates.length; i++){
-            uint index = dayToday - (rates[i].ratingTime / uint(Const.DAY_SECONDS)); // should be from 0 to Const.RATE_DAYS + 1)
-            if(index < Const.RATE_DAYS) daysRates[index]++;
+            uint index = (block.timestamp - rates[i].ratingTime) / uint(Const.DAY_SECONDS); // should be from 0 to Const.RATE_DAYS)
+            if(index < Const.RATE_DAYS) daysRates[index] = daysRates[index] + 1;
         }
-        for(uint i=0; i<Const.RATE_DAYS; i++)
-            if(daysRates[i] < Const.DAILY_RATES_REQUIRED)
+        for(uint i=0; i<Const.RATE_DAYS; i++){
+            uint ratesForDay = daysRates[i];
+            if(ratesForDay < Const.DAILY_RATES_REQUIRED)
                 return false;
+        }
         return true;
     }
 
@@ -530,7 +555,7 @@ contract ChainFit is ChainFitInterface {
     }
 
     function isOwnVisit(uint visitId) view internal returns(bool result){
-        return gymVisits[visitId].user.userAddress == msg.sender;
+        return gymVisits[visitId].user == msg.sender;
     }
 
 
