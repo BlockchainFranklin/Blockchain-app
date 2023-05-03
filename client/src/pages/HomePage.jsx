@@ -23,7 +23,7 @@ const HomePage = () => (
     <div className={`sticky top-0 
                      ${styles.paddingX} 
                      ${styles.flexCenter} 
-                     bg-black`} 
+                     bg-navbar`} 
         style={{ zIndex: 9999 }}>
       <div className={`${styles.boxWidth} `}>      
         <Navbar type="navbar" />
