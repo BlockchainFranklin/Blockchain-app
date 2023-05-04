@@ -12,10 +12,10 @@ const WorkFourth = () => {
     return (
         <section id="product" className={layout.sectionReverse}>
             <div data-aos="fade-right" className={layout.sectionImgReverse}>
-                <img src={money} alt="money" className="w-[40%] h-[65%] relative z-[5] rounded-tl-100 rounded-br-5" />
+                <img src={money} alt="money" className="w-[100%] h-[100%] relative z-[5] rounded-tl-100 rounded-br-5" />
             </div>
             <div data-aos="fade-right" className={layout.sectionInfo}>
-                <div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full darkblue__gradient right-1" />
+                {/*<div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full darkblue__gradient right-1" />*/}
                 <h2 className={styles.heading2}>
                     {workText.find(btn => btn.id === 'workfourthtitle1').title}  <br className="sm:block hidden" /> 
                     {workText.find(btn => btn.id === 'workfourthtitle2').title} 

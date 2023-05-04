@@ -59,7 +59,7 @@ const WalletPage = () => {
   return (
     <div className="bg-primary w-full">
 
-      <div className={`sticky top-0 ${styles.paddingX} ${styles.flexCenter} bg-navbar`} style={{ zIndex: 9999 }}>
+      <div className={`sticky top-0 ${styles.paddingX} ${styles.flexCenter} bg-navbar`} style={{ zIndex: 9999, backdropFilter: 'blur(15px)'}}>
       <div className={`${styles.boxWidth} `}>      
         <Navbar type="navbar2" />
       </div>

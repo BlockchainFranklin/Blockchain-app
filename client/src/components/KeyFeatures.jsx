@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styles from '../style';
 import { keyFeaturesText } from '../constants';
+import { blockchain, coin, dumbbells } from "../assets";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
@@ -10,8 +11,8 @@ const KeyFeatures = () => {
   }, [])
 
   return (
-    <section id="features" className={`${styles.paddingY} ${styles.flexCenter} flex-col relative `}>
-      <div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full blue__gradient bottom-40" /> 
+    <section id="features" className={`${styles.paddingY} ${styles.flexCenter} flex-col relative`}>
+      <div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%]  rounded-full lightblue__gradient bottom-40" /> 
       <div data-aos="fade-up">
         <h2 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-main text-center">
           {keyFeaturesText.find(btn => btn.id === 'keyfeatures').title}
@@ -25,13 +26,21 @@ const KeyFeatures = () => {
           </p>
         </div>
       </div>
-      <br />
-      <br />
-      <div className="container">
+      <div className="w-full pt-160 mt-6 container" style={{paddingTop: '15vh'}}>
         <div className="row">
-          <div data-aos="fade-right" data-aos-delay="100" data-aos-duration="9000" className="box2" />
-          <div data-aos="fade-right" data-aos-delay="200" className="box2" />
-          <div data-aos="fade-right" data-aos-delay="300" className="box2" />
+          <div data-aos="fade-right" data-aos-delay="100" class="box2 box2-first">
+            <img src={blockchain} alt="blockchain"/>
+            <h2>Blockchain system</h2>
+          </div>
+          <div data-aos="fade-right" data-aos-delay="200" className="box2 box2-second" >
+            <img src={dumbbells} alt="dumbbells"/>
+            <h2>Example text</h2>
+          </div>
+
+          <div data-aos="fade-right" data-aos-delay="300" className="box2 box2-third" >
+            <img src={coin} alt="dumbbells"/>
+            <h2>Example text</h2>
+          </div>
         </div>
       </div>
     </section>

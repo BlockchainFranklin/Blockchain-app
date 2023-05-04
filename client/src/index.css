@@ -23,7 +23,7 @@
   );
   --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
   --primary-color: #0a141f; 
-  --navbar-color: #0a1620;
+  --navbar-color: rgba(10, 22, 32, 0.8)
 }
 
 * {
@@ -69,7 +69,7 @@ canvas {
     #7482f0 17.23%,
     #adadfa 42.04%,
     #8880f3 55.12%,
-    #4141e7 71.54%,
+    #24247c 71.54%,
     #0b0ff8 100%
   );
   -webkit-background-clip: text;
@@ -81,10 +81,10 @@ canvas {
 .text-gradient-main {
   background: radial-gradient(
     28.18% 94.18% at 75.16% 35.69%,
-    #6f6bf2 17.23%,
-    #5a56bf 42.04%,
-    #423f8c 55.12%,
-    #2c2a59 71.54%,
+    #181731 17.23%,
+    #181731 42.04%,
+    #181731 55.12%,
+    #181731 71.54%,
     #f2e18d 100%
   );
   -webkit-background-clip: text;
@@ -227,8 +227,8 @@ canvas {
 
 
 .yellow__gradient {
-  background: linear-gradient(180deg, rgba(249, 255, 165, 0) 0%, #f2e18d 100%);
-  filter: blur(123px);
+  background: linear-gradient(180deg, rgba(249, 255, 165, 0) 0%, #f2e18d 95%);
+  filter: blur(100px);
 }
 
 .darkblue__gradient {
@@ -236,20 +236,10 @@ canvas {
   filter: blur(123px);
 }
 
-.dark__gradient_animation {
-  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #2c2a59 100%);
-  filter: blur(123px);
-  opacity: 1; /* Początkowa wartość przezroczystości */
-  animation-name: fade1; /* Nazwa animacji */
-  animation-duration: 35s; /* Czas trwania animacji */
-  animation-timing-function: ease-in-out; /* Funkcja czasu animacji */
-  animation-iteration-count: infinite; /* Liczba powtórzeń animacji (w tym przypadku nieskończoność) */
-}
-
 
 .lightblue__gradient {
-  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #5a56bf 100%);
-  filter: blur(123px);
+  background: linear-gradient(270deg, rgba(188, 165, 255, 0) 0%, #5a56bf 80%);
+  filter: blur(35vh);
 }
 
 .pink__gradient {
@@ -331,63 +321,92 @@ canvas {
   background: orange;
 }
 
+.heroicon {
+  position: relative; 
+  left: auto; /* ustawienie poziomego wyśrodkowania */
+  transform: translateX(-50%); /* wyśrodkowanie w poziomie */
+  height: auto; 
+  animation: moveIconUpDown 10s ease-in-out infinite;
+}
+@keyframes moveIconUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
 
 .square-animation {
   animation: wipe-enter 1s 1;
 }
 
-.box2{
+.box2 {
   position: relative;
   width: 300px;
   height: 400px;
-  background: rgba(0,0,0,0.75);
-  border-radius: 5px;
+  border-radius: 60px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin-right: 5vh;
+  margin-bottom: 5vh;
+  background: radial-gradient(
+    circle at center,
+    transparent,
+    rgba(0, 0, 0, 0.8)
+  );
+  background-size: 200% 200%;
+  animation: gradient-animation 10s ease infinite;
+  transform: scale(0.2);
+  font-size: 2em;
 }
 
-.box2::after{
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background-image: conic-gradient(transparent, transparent,
-  transparent, #d400d4);
-  animation: animate 60s ease-out infinite;
-  animation-delay: -30s;
-}
-
-.box2::before{
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background-image: conic-gradient(transparent, transparent,
-  transparent, #00ccff);
-  animation: animate 60s linear infinite;
-}
-
-
-@keyframes animate{
-  0%
-  {
-    transform: rotate(0deg);
+@keyframes gradient-animation {
+  0% {
+    background-position: 50% 65%;
   }
-  100%
-  {
-    transform: rotate(360deg);
+  50% {
+    background-position: 50% 35%;
+  }
+  100% {
+    background-position: 50% 65%;
   }
 }
 
-.box2 span{
-  position: absolute;
-  inset: 5px;
-  border-radius: 5px;
-  background: #0c1022;
-  z-index: 1;
+
+/* Ostatni box nie powinien mieć marginesu po prawej stronie */
+.box2:last-child {
+  margin-right: 0;
 }
+
+.box2-first {
+  background-color: rgba(49, 32, 201, 0.5);
+}
+
+.box2-second {
+  background-color: rgba(61, 1, 73, 1);
+}
+
+.box2-third {
+  background-color: rgba(4, 126, 134, 0.9);
+}
+
+.box2:nth-of-type(2) {
+  animation-delay: 2s;
+}
+
+.box2:nth-of-type(3) {
+  animation-delay: 4s;
+}
+
 
 
 /* TEXT BORDER */

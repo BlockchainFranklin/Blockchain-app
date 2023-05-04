@@ -13,6 +13,7 @@ const AboutUs = () => {
     <section id="vision" className={`${styles.flexDiv}}`}>    
         {/* colored horizontal line */}
         {/* PRZENIEŚĆ DO CSS! */}
+
         <div data-aos="zoom-in" style={{
           background: 'linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.8) 48%, rgba(255, 255, 255, 0.8) 5%, transparent 100%)',
           height: '4px',

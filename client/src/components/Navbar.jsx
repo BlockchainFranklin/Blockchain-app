@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { close, chainFit, menu } from '../assets'; 
+import { close, chainfit, menu } from '../assets'; 
 import { navLinks, buttonText } from '../constants';        
 import { useReadingProgress } from '../hooks'   
 
@@ -9,11 +9,11 @@ const Navbar = ({ type }) => {
   const completion = useReadingProgress();
 
   return (
-    <nav className="w-full flex py-6 justify-between items-center top-0 ">
-      <img src={chainFit} alt="chainfit" className="w-[100px] h-[65px]" />
+    <nav className="w-full flex py-2 justify-between items-center top-0 ">
+      <img src={chainfit} alt="chainfit" className="w-[100px] h-[65px]" />
         {type === 'navbar' && (
         <div>
-          <ul className="list-none sm:flex hidden justify-end items-center flex-1">
+          <ul className="list-none lg:flex hidden justify-end items-center flex-1">
             {navLinks.map((nav, index) => (
               <li
                 key={nav.id}
@@ -32,7 +32,8 @@ const Navbar = ({ type }) => {
               </Link>
             </div>
           </ul>
-        <div className="sm:hidden flex flex-1 justify-end items-center">
+          
+        <div className="lg:hidden flex flex-1 justify-end items-center">
           <img 
             src={toggle ? close : menu} 
             alt="menu"

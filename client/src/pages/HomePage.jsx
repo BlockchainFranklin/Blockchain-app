@@ -24,7 +24,7 @@ const HomePage = () => (
                      ${styles.paddingX} 
                      ${styles.flexCenter} 
                      bg-navbar`} 
-        style={{ zIndex: 9999 }}>
+        style={{ zIndex: 9999, backdropFilter: 'blur(15px)'}}>
       <div className={`${styles.boxWidth} `}>      
         <Navbar type="navbar" />
       </div>
@@ -58,15 +58,15 @@ const HomePage = () => (
                      ${styles.paddingX} 
                      ${styles.flexCenter} `}>
       <div className={`${styles.boxWidth} `}>
-        <div style={{ margin: '320px 0' }}>
+        <div style={{ margin: '15vh 0' }}>
         </div>  
         <AboutUs />
-        <div style={{ margin: '80px 0' }}></div> 
+        <div style={{ margin: '25vh 0' }}></div> 
         <KeyFeatures />
         <HowWorks />
-        <WorkFirst />
+   
         <WorkSecond />
-        <WorkThird />
+     
         <WorkFourth />
         <div style={{ margin: '80px 0' }}></div>    
         <ContactUs />

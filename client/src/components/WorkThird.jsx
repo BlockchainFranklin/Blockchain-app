@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { workText } from '../constants';
-import { icons } from '../assets'
+import { instafb } from '../assets'
 import styles, { layout } from '../style'
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -13,7 +13,7 @@ const WorkThird = () => {
     return (
         <section className={layout.section}>
             <div data-aos="fade-left" className={layout.sectionInfo}>
-                <div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full darkblue__gradient left-1" />
+                {/*<div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full darkblue__gradient left-1" />*/}
                 <h2 className={styles.heading2}>
                     {workText.find(btn => btn.id === 'workthirdtitle1').title} 
                     <br className="sm:block hidden" /> 
@@ -23,8 +23,8 @@ const WorkThird = () => {
                     {workText.find(btn => btn.id === 'workthirdtitle2').content} 
                 </p>
             </div>
-            <div data-aos="fade-left" className={layout.sectionImg}>
-                <img src={icons} alt="icons" className="w-[50%] h-[50%]" />
+            <div data-aos="fade-left" className={layout.sectionImgReverse}>
+                <img src={instafb} alt="icons" className="w-[100%] h-[100%]" />
             </div>
         </section>
     );

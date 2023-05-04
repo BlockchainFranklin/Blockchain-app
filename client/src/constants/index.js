@@ -94,10 +94,11 @@ export const keyFeaturesText = [
   {
     id: "keyfeatures",
     title: "Key Features",
-    content: "With ChainFit, you can expect a cutting-edge application that offers \
-    features like workout tracking, social sharing, community building, and secure \
-    payments. Our team will work with you to identify the key features that matter \
-    most to your business and deliver an application that exceeds your expectations.",
+    content: "Our application combines the elements of a gym,\
+    a token collection system, and blockchain technology to\
+    create an innovative and rewarding user experience.\
+    Start your fitness journey, earn tokens, and embrace the\
+    future of secure and immersive applications with us!",
   },
 ];
 
@@ -108,44 +109,63 @@ export const workText = [
   },
   {
     id: "workfirsttitle1",
-    title: "Go to",
+    title: "Go to ",
   },
   {
     id: "workfirsttitle2",
     title: "the gym",
-    content: "Users can choose from a list of participating gyms on the app and \
-    check-in when they arrive at the gym."
+    content: "Find and check in to participating gyms:\
+    Easily locate and select from a list of partner gyms\
+    in our app. Users can select their preferred gym and\
+    seamlessly check in when they arrive, making it easy\
+    to track gym sessions and progress. Start your fitness\
+    routine by accessing our app and effortlessly connect\
+    with a network of participating gyms."
   },
   {
     id: "worksecondtitle1",
-    title: "Generate QR",
+    title: "Take ",
   },
   {
     id: "worksecondtitle2",
-    title: "code to wallet",
-    content: "After checking in, the user can generate a unique QR code that is \
-    linked to their digital wallet on the app."
+    title: "a photo",
+    content: "Take photos to document your gym attendance\
+    and share them with us via the app. By demonstrating\
+    your active participation, you become eligible for\
+    exciting rewards and incentives. Our app makes it\
+    easy to record and share your journey to the gym,\
+    ensuring that your progress is recognized and rewarded."
   },
   {
     id: "workthirdtitle1",
-    title: "Share QR",
+    title: "Share the photo ",
   },
   {
     id: "workthirdtitle2",
     title: "on social media",
-    content: "Users have the option to share their QR code on their social media \
-    profiles, inviting friends and followers to join the app and earn tokens together."
+    content: "When you upload your gym photo to our app,\
+    it will generate your unique QR code, which will be added\
+    to the photo when you share it on social media. This QR code\
+    serves a dual purpose - it acts as an invitation for others to\
+    join the app and participate, while also allowing you to easily\
+    confirm your gym attendance. Share your achievements with your\
+    friends and followers, encouraging them to join your fitness journey.\
+    With our web app, sharing your fitness progress and inviting others\
+    has never been easier or more engaging."
   },
   {
     id: "workfourthtitle1",
-    title: "Earn",
+    title: "Earn ",
   },
   {
     id: "workfourthtitle2",
     title: "money",
-    content: "Each time the user completes a workout session and checks out of \
-    the gym, they earn tokens which can be exchanged for real money or used to \
-    access various fitness-related products and services on the app."
+    content: "Maximize your motivation and engagement by earning tokens\
+    through our web app. Every time you complete a workout, check in at\
+    the gym, share photos and it is confirmed by other users you will\
+    accumulate tokens. With our token system, your dedication is recognized\
+    and rewarded, creating a more rewarding and engaging fitness experience.\
+    Start earning tokens and reaping the benefits of your hard work with our web app."
   },
 ];
 
