@@ -13,15 +13,11 @@ const useReadingProgress = () => {
         );
       }
     }
-
     window.addEventListener('scroll', updateScrollCompletion);
-
     return () => {
       window.removeEventListener('scroll', updateScrollCompletion);
     }
-
   }, []);
-
   return completion;
 }
 

@@ -17,6 +17,9 @@ import Login from './Login'
 import Sphere from './Sphere'
 
 //WalletPage components
+import Sidebar from './Sidebar'
+import Statistics from './Statistics'
+import StatisticsChart from './StatisticsChart'
 
 
 export {
@@ -35,6 +38,10 @@ export {
 
     Login,
     Sphere,
+
+    Sidebar,
+    Statistics,
+    StatisticsChart
 }
 
 

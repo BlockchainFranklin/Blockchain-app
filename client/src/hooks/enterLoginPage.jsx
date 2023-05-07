@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 const enterLoginPage = () => {
     const currentUrl = window.location.href;  // pobranie aktualnego adresu URL
     const newUrl = currentUrl.replace('/login', '') + '/wallet';
-  
     useEffect(() => {
       if (window.ethereum && window.ethereum.selectedAddress === null) {
           console.log("selectedAddress: ", window.ethereum.selectedAddress);

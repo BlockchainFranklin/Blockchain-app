@@ -28,7 +28,7 @@ const KeyFeatures = () => {
       </div>
       <div className="w-full pt-160 mt-6 container" style={{paddingTop: '15vh'}}>
         <div className="row">
-          <div data-aos="fade-right" data-aos-delay="100" class="box2 box2-first">
+          <div data-aos="fade-right" data-aos-delay="100" className="box2 box2-first">
             <img src={blockchain} alt="blockchain"/>
             <h2>Blockchain system</h2>
           </div>

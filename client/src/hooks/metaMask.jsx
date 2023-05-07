@@ -39,22 +39,13 @@ export const MetaMaskProvider = ({ children }) => {
             console.log('Error on connecting: ', error)
         }
     }
-    // Disconnect from Metamask wallet
-    const disconnect = async () => {
-        console.log('Deactivating...')
-        try {
-            await deactivate()
-        } catch(error) {
-            console.log('Error on disconnecting: ', error)
-        }
-    }
+
     const values = useMemo(
         () => ({
             isActive,
             account,
             isLoading,
             connect,
-            disconnect,
             connect_no_refresh
         }),
         [isActive, isLoading]
@@ -67,6 +58,5 @@ export default function metaMask() {
     if (context === undefined) {
         throw new Error('metaMask hook must be used with a MetaMaskProvider component')
     }
-
     return context
 }
