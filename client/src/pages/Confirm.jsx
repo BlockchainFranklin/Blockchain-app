@@ -57,7 +57,14 @@ const Confirm = () => {
                                 <th><strong>Cash it!</strong></th>
                             </tr>
                         </thead>
-                        <tbody>{tableHtml}</tbody>
+                        <tbody>{tableHtml.map(row => (
+                            <tr>
+                                {row.map(cell => (
+                                <td>{cell}</td>
+                                ))}
+                            </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
                 <div class="panel-footer">
