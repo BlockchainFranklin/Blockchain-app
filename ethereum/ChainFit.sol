@@ -253,7 +253,7 @@ contract ChainFit {
 
 
 
-   // Get the visit rates for user not older than historyTime (from now)
+    // Get the visit rates for user not older than historyTime (from now)
     function getUserVisitRates(address user, uint historyTime) notZero(historyTime) public view returns(GymVisitRate[] memory){
         if(gymVisitRatesCount == 0) return new GymVisitRate[](0);
 
@@ -292,7 +292,7 @@ contract ChainFit {
         uint[] memory rates = gymVisits[visitId].ratesIds;
         GymVisitRate[] memory ret = new GymVisitRate[](rates.length);
         for(uint i=0; i<rates.length; i++){
-            ret[i] = gymVisitRates[i];
+            ret[i] = gymVisitRates[rates[i]];
         }
         return ret;
     }
