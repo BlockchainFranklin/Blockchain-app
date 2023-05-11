@@ -1,6 +1,6 @@
 const walletAddress = window.ethereum.selectedAddress;
-//const chainfitAddress = '0xE30913e1b0D06c016D09B6824E19bEAB56eDc00D';
-const chainfitAddress = '0xe49D4AC3aF97Dbf2b55bf44DF5dAE75277261652';
+const chainfitAddress = '0x7EFE34B0fb891b6CeC47493696716cb817D21341';
+//const chainfitAddress = '0x034F4AfeC9bd127Cf6f7B6C5A56E7ab20d465d0a';
 
 const web3 = new Web3('ws://127.0.0.1:8545');
 import abi from "./CF_abi.jsx";
@@ -8,9 +8,9 @@ import {mapResultFromInt} from '../services/Results.jsx';
 const contract = new web3.eth.Contract(abi, chainfitAddress);
 
 
+
 export async function getAllGymVisits(){
     try {
-        console.log(walletAddress);
         const result = await contract.methods.getVisits(walletAddress).call();
 
         // GymVisit[]
@@ -132,15 +132,81 @@ export async function getVisitRates(visitId) {
 
 
   export async function checkVisit(visitId) {
-    console.log('Checking visit ' + visitId);
-    try {
-        const result = await contract.methods.checkVisit(visitId).call();
-        console.log(result);
+
+    const checkVisitAndSendTransaction = async (visitId) => {
+      const accounts = await web3.eth.getAccounts();
+      const resultRet = await contract.methods.checkVisit(visitId).call();
+      if(resultRet == 1){
+        alert(`Visit don't meet the confirm conditions, but it's still in progress`);
+      }
+      else {
+        const result = await contract.methods.checkVisit(visitId).send({ from: accounts[0] });
         var resultstring = mapResultFromInt(result);
-        alert(`Visit ${visitId} verification completed with result: ${resultstring}`);
-        return result;
-    } catch (error) {
-        console.error(error);
-        throw new Error(`Failed to check visit with id ${visitId}. Error message: ${error.message}`);
-    }
+        alert(`Transaction result: ` + resultstring);
+        location.reload();
+      }
+     };
+
+  checkVisitAndSendTransaction(visitId);
   }
+
+
+
+  export async function addRate(visitId, rateResult) {
+
+    const checkVisitAndSendTransaction = async (visitId) => {
+      const accounts = await web3.eth.getAccounts();
+      const resultRet = await contract.methods.checkVisit(visitId).call();
+      if(resultRet == 1){
+        alert(`Visit don't meet the confirm conditions, but it's still in progress`);
+      }
+      else {
+        const result = await contract.methods.checkVisit(visitId).send({ from: accounts[0] });
+        var resultstring = mapResultFromInt(result);
+        alert(`Transaction result: ` + resultstring);
+        location.reload();
+      }
+     };
+
+  checkVisitAndSendTransaction(visitId);
+  }
+
+
+  export async function getRandomPhotoToRate(){
+    TODO
+  }
+
+  export async function getVisitIdByHash(visitHash){
+    TODO
+  }
+
+
+  export async function getGymVisitsFrom3Days(){
+    const step = 20;
+    const now = Math.floor(Date.now() / 1000);
+    var countAll = await contract.methods.getVisitsCount().call();
+    var idTo = countAll -1;
+    var idFrom = countAll - step;
+    if(idFrom < 0) idFrom == 0;
+    var visitToRate = -1;
+    var lastVisitTime = now;
+    while(visitToRate == -1 && idFrom > 0 && now - 3 * 24 * 3600 < lastVisitTime){
+      console.log(idFrom + ' ' + idTo);
+      const gymVisits = await contract.methods.getVisits(idFrom, idTo).call();
+      const checked = new Array(step).fill(false);
+      for(let i=0; i<idTo-idFrom; i++){
+        var r = Math.floor(Math.random() * (idTo-idFrom));
+        var r1 = r;
+        while(checked[r++%(idTo-idFrom)] && r != r1);
+        if(r == r1) break;
+        const gymVisit = gymVisits[idFrom + r];
+        const isRated = await contract.methods.checkRated(walletAddress, idFrom + r).call();
+        console.log(gymVisits + ' ' + r);
+        if(!isRated) visitToRate = gymVisit.hash;
+      }
+      idTo -= step;
+      idFrom -= step;
+    }
+    return visitToRate;
+  }
+

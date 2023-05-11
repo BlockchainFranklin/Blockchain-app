@@ -2,7 +2,8 @@ import React from 'react'
 import "../styles/confirmstyles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getGymVisitsTableView } from '../services/GymVisitDataService.jsx';
-
+import { getVisitCount } from '../web3/SmartContract.jsx';
+import { useState } from 'react';
 
 const { selectedAddress } = window.ethereum;
 if (selectedAddress !== null) {}
@@ -11,15 +12,10 @@ else {
 }
 
 
-const handleButtonClick = () => {
-    // wywołanie metody z innego pliku JavaScript
-    console.log("Button clicked");
-  };
-
 
 let tableHtml = null;
 tableHtml = await getGymVisitsTableView();
-console.log('TableHtml: ' + tableHtml);
+let visitCount = await getVisitCount(window.ethereum.selectedAddress);
 
 const Confirm = () => {
 
@@ -69,22 +65,7 @@ const Confirm = () => {
                 </div>
                 <div class="panel-footer">
                     <div class="row">
-                        <div class="col col-sm-6 col-xs-6">showing <b>5</b> out of <b>25</b> entries</div>
-                        <div class="col-sm-6 col-xs-6">
-                            <ul class="pagination hidden-xs pull-right">
-                                <li><a href="#">{'<'}</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">{'>'}</a></li>
-                            </ul>
-                            <ul class="pagination visible-xs pull-right">
-                                <li><a href="#">{'<'}</a></li>
-                                <li><a href="#">{'>'}</a></li>
-                            </ul>
-                        </div>
+                        <div class="col col-sm-12">Count of your gym visits: <strong>{visitCount}</strong>.  Good job!</div>
                     </div>
                 </div>
             </div>

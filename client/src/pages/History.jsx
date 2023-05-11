@@ -8,7 +8,6 @@ import { useState } from 'react';
 let tableHtml = null;
 tableHtml = await getGymVisitRatesTableView();
 let visitRatesCount = await getVisitRatesCount(window.ethereum.selectedAddress, 60*60*24*14);
-console.log('TableHtml: ' + tableHtml);
 
 
 const History = () => {

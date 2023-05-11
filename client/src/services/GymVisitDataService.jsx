@@ -7,8 +7,9 @@ export async function getGymVisitsTableView(){
   if(gymVisits == null) return [];
   
   const tableData = gymVisits.map(async (gymVisit) => {
-    const getRatesTextValue = await getRatesText(gymVisit.visitId);
-    const getRatesPercentValue = await getRatesPercent(gymVisit.visitId);
+    var rateData = await getRatesData(gymVisit.visitId);
+    const getRatesTextValue = await getRatesText(rateData);
+    const getRatesPercentValue = await getRatesPercent(rateData);
     return [
       gymVisit.visitId.toString(),
       formatTime(gymVisit.visitTime),
@@ -23,9 +24,9 @@ export async function getGymVisitsTableView(){
 }
 
 function setButtonVisibility(gymVisit) {
-  if (gymVisit.result === "Positive") {
+  if (gymVisit.result == 0) {
     return 'Reward received';
-  } else if (!gymVisit.result === "InProgress") {
+  } else if (gymVisit.result != 1) {
     return 'Negative verification';
   } else {
     return <a onClick={() => handleButtonClick(gymVisit.visitId)} className="btnaccept btnaccept-lg"><span>Check visit</span></a>;
@@ -38,8 +39,7 @@ async function handleButtonClick(visitId){
 }
 
 
-export async function getRatesText(visitId){
-    var rateData = await getRatesData(visitId);
+export async function getRatesText(rateData){
     const { positiveQR, positiveApp, negativeQR, negativeApp } = rateData;
 
     const sumAll = positiveQR + positiveApp + negativeQR + negativeApp;
@@ -50,8 +50,7 @@ export async function getRatesText(visitId){
     return resultString;
 }
 
-export async function getRatesPercent(visitId){
-    var rateData = await getRatesData(visitId);
+export async function getRatesPercent(rateData){
     const { positiveQR, positiveApp, negativeQR, negativeApp } = rateData;
     const positiveSum = positiveQR + positiveApp;
     const negativeSum = negativeQR + negativeApp;
@@ -68,19 +67,18 @@ async function getRatesData(visitId){
     let positiveApp = 0;
     let negativeQR = 0;
     let negativeApp = 0;
-
     // iterujemy po tabeli ocen i zliczamy ilość ocen
     gymVisitRates.forEach((rate) => {
-      if (rate.rate === "Positive") {
-        if (rate.rateSource === "QRCode") {
+      if (rate.rate == 0) {
+        if (rate.rateSource == 0) {
           positiveQR++;
-        } else if (rate.rateSource === "App") {
+        } else if (rate.rateSource == 1) {
           positiveApp++;
         }
-      } else if (rate.rate === "Negative") {
-        if (rate.rateSource === "QRCode") {
+      } else if (rate.rate == 1) {
+        if (rate.rateSource == 0) {
           negativeQR++;
-        } else if (rate.rateSource === "App") {
+        } else if (rate.rateSource == 1) {
           negativeApp++;
         }
       }
