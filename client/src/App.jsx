@@ -10,6 +10,7 @@ import { HomePage,
          Dashboard, 
          TakePhoto, 
          History,
+         AddRate,
          Confirm 
         } from './pages';
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="dashboard" element={<Dashboard/>}/>
             <Route path="takephoto" element={<TakePhoto/>}/>
             <Route path="history" element={<History/>}/>
+            <Route path="addrate" element={<AddRate/>}/>
             <Route path="confirm" element={<Confirm/>}/>
           </Route>
           <Route exact path="*" element={<NotFoundPage />} />

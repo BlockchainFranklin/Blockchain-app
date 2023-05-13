@@ -1,6 +1,6 @@
 
 export function mapResultFromInt(result) {
-    if (result === 0) {
+    if (result == 0) {
         return('Visit accepted');
       } else if (result == 1) {
         return('Visit in progress');

@@ -1,11 +1,33 @@
+import {mapResultFromInt} from '../services/Results.jsx';
+
 const walletAddress = window.ethereum.selectedAddress;
-const chainfitAddress = '0x7EFE34B0fb891b6CeC47493696716cb817D21341';
-//const chainfitAddress = '0x034F4AfeC9bd127Cf6f7B6C5A56E7ab20d465d0a';
+const chainfitAddress = '0x8A1D8870837C4adaED9E6112522cBe367Ae7F512';
+const chainfitTokenAddress = '0x321340203F1C3Cec18f6adb17BBaF8515D1D9Bb2';
 
 const web3 = new Web3('ws://127.0.0.1:8545');
 import abi from "./CF_abi.jsx";
-import {mapResultFromInt} from '../services/Results.jsx';
+import abiToken from "./CFT_abi.jsx";
+
 const contract = new web3.eth.Contract(abi, chainfitAddress);
+const contractToken = new web3.eth.Contract(abiToken, chainfitTokenAddress);
+
+
+
+export async function cftBalance(){
+  return await contractToken.methods.balanceOf(walletAddress).call();
+}
+
+export async function ethBalance(){
+  try {
+    const balance = await web3.eth.getBalance(walletAddress);
+    return balance;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
 
 
 
@@ -134,14 +156,15 @@ export async function getVisitRates(visitId) {
   export async function checkVisit(visitId) {
 
     const checkVisitAndSendTransaction = async (visitId) => {
-      const accounts = await web3.eth.getAccounts();
-      const resultRet = await contract.methods.checkVisit(visitId).call();
+      console.log('a');
+      const resultRet = await contract.methods.checkVisit(visitId).call( {from: walletAddress} );
+      console.log(resultRet)
       if(resultRet == 1){
         alert(`Visit don't meet the confirm conditions, but it's still in progress`);
       }
       else {
-        const result = await contract.methods.checkVisit(visitId).send({ from: accounts[0] });
-        var resultstring = mapResultFromInt(result);
+        const result = await contract.methods.checkVisit(visitId).send({ from: walletAddress, gas: 10000000 });
+        var resultstring = mapResultFromInt(resultRet);
         alert(`Transaction result: ` + resultstring);
         location.reload();
       }
@@ -152,61 +175,41 @@ export async function getVisitRates(visitId) {
 
 
 
-  export async function addRate(visitId, rateResult) {
-
-    const checkVisitAndSendTransaction = async (visitId) => {
-      const accounts = await web3.eth.getAccounts();
-      const resultRet = await contract.methods.checkVisit(visitId).call();
-      if(resultRet == 1){
-        alert(`Visit don't meet the confirm conditions, but it's still in progress`);
-      }
-      else {
-        const result = await contract.methods.checkVisit(visitId).send({ from: accounts[0] });
-        var resultstring = mapResultFromInt(result);
-        alert(`Transaction result: ` + resultstring);
-        location.reload();
-      }
-     };
-
-  checkVisitAndSendTransaction(visitId);
+  export async function addRate(visitId, rateResult, rateSource) {
+      const result = await contract.methods.addRate(visitId, rateResult, rateSource).send({ from: walletAddress, gas: 4700000 });
+      alert(`Rate added`);
   }
 
-
-  export async function getRandomPhotoToRate(){
-    TODO
-  }
 
   export async function getVisitIdByHash(visitHash){
-    TODO
+    const gymVisits = await contract.methods.getVisitsToRate().call({ from: walletAddress });
+    for(let i=0; i<gymVisit.length; i++)
+      if(gymVisits[i].hash == visitHash)
+        return gymVisits[i].visitId;
+    return -1;
+  }
+
+  export async function checkRated(visitId){
+    return await contract.methods.checkRated(walletAddress, visitId).call({ from: walletAddress });
   }
 
 
-  export async function getGymVisitsFrom3Days(){
-    const step = 20;
-    const now = Math.floor(Date.now() / 1000);
-    var countAll = await contract.methods.getVisitsCount().call();
-    var idTo = countAll -1;
-    var idFrom = countAll - step;
-    if(idFrom < 0) idFrom == 0;
-    var visitToRate = -1;
-    var lastVisitTime = now;
-    while(visitToRate == -1 && idFrom > 0 && now - 3 * 24 * 3600 < lastVisitTime){
-      console.log(idFrom + ' ' + idTo);
-      const gymVisits = await contract.methods.getVisits(idFrom, idTo).call();
-      const checked = new Array(step).fill(false);
-      for(let i=0; i<idTo-idFrom; i++){
-        var r = Math.floor(Math.random() * (idTo-idFrom));
-        var r1 = r;
-        while(checked[r++%(idTo-idFrom)] && r != r1);
-        if(r == r1) break;
-        const gymVisit = gymVisits[idFrom + r];
-        const isRated = await contract.methods.checkRated(walletAddress, idFrom + r).call();
-        console.log(gymVisits + ' ' + r);
-        if(!isRated) visitToRate = gymVisit.hash;
-      }
-      idTo -= step;
-      idFrom -= step;
+  export async function getRandomGymVisitHashToRate(){
+    const gymVisits = await contract.methods.getVisitsToRate().call({ from: walletAddress });
+    const checked = new Array(gymVisits.length).fill(false);
+    var ret = null;
+    for(let i=0; i<gymVisits.length; i++){
+        var r = Math.floor(Math.random() * gymVisits.length);
+        while(checked[r]) r = (r+1) % gymVisits.length;
+        const isRated = await checkRated(gymVisits[r].visitId);
+        if(!isRated){
+          ret = [gymVisits[r].visitId,gymVisits[r].hash];
+          break;
+        }
+        else
+          checked[r] = true;
     }
-    return visitToRate;
+    console.log(ret);
+    return ret;
   }
 
