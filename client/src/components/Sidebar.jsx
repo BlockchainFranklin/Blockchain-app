@@ -1,6 +1,6 @@
 import { AiOutlineTable } from "react-icons/ai";
 import { BsPersonBoundingBox } from "react-icons/bs";
-import { FaWallet, FaHistory, FaCheck } from "react-icons/fa";
+import { FaWallet, FaHistory, FaCheck, FaImage } from "react-icons/fa";
 import { NavLink, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -22,7 +22,13 @@ const Sidebar = () => {
                 >
                     <BsPersonBoundingBox size={30}/>
                 </NavLink>
-
+                <NavLink
+                    to="addrate"
+                    className={`itemSidebar ${location.pathname === '/addrate' ? 'active' : ''}`}
+                    title="Add rate"
+                >
+                    <FaImage size={30}/>
+                </NavLink>
                 <NavLink
                     to="history"
                     className={`itemSidebar ${location.pathname === '/history' ? 'active' : ''}`}
