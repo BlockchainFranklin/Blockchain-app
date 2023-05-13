@@ -5,6 +5,7 @@ import fragmentShader from './fragmentShader'
 import vertexShader from './vertexShader'
 import metaMask from './metaMask'
 import { injected } from './connectors'
+import getQuote from "./getQuote"
 
 export {
     useReadingProgress,
@@ -14,4 +15,5 @@ export {
     vertexShader,
     metaMask,
     injected,
+    getQuote,
 }
