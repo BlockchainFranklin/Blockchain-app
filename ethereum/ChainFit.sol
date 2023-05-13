@@ -140,6 +140,25 @@ contract ChainFit {
         return gymVisitRatesCount;
     }
 
+    function getVisitsToRate() external view returns(GymVisit[] memory) {
+        uint i = gymVisitsCount-1;
+        uint count = 0;
+        while(i >= 0 && checkVisitRatingTimeNotExceed(i)) {
+            if(gymVisits[i].user != msg.sender) count++;
+            i--;
+        }
+        GymVisit[] memory visits = new GymVisit[](count);
+        uint j=0;
+        i = gymVisitsCount-1;
+        while(i >= 0 && checkVisitRatingTimeNotExceed(i)) {
+            if(gymVisits[i].user != msg.sender) 
+                visits[j++] = gymVisits[i];
+            i--;
+        }
+        
+        return visits;
+    }
+
 
 
 
@@ -261,17 +280,16 @@ contract ChainFit {
         uint userVisitRatesCount = 0;
 
         // Count the number of gym visit rates for the given user that meet the historyTime criteria
-        for (uint i = 0; i < gymVisitRatesCount; i++) {
-            if (gymVisitRates[i].userRated == user && gymVisitRates[i].ratingTime >= minTime) {
+        for(uint i=0; i<gymVisitRatesCount; i++){
+            if(gymVisitRates[i].ratingTime >= minTime && gymVisitRates[i].userRated == user)
                 userVisitRatesCount++;
-            }
         }
 
         GymVisitRate[] memory userVisitRates = new GymVisitRate[](userVisitRatesCount);
         uint userVisitRatesIndex = 0;
 
-        for (uint i = 0; i < gymVisitRatesCount; i++) {
-            if (gymVisitRates[i].userRated == user && gymVisitRates[i].ratingTime >= historyTime) {
+        for(uint i=0; i<gymVisitRatesCount; i++){
+            if(gymVisitRates[i].ratingTime >= minTime && gymVisitRates[i].userRated == user){
                 userVisitRates[userVisitRatesIndex] = gymVisitRates[i];
                 userVisitRatesIndex++;
             }
