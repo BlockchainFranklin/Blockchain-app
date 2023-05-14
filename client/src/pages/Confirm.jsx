@@ -1,6 +1,5 @@
 import React from 'react'
 import "../styles/confirmstyles.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { getGymVisitsTableView } from '../services/GymVisitDataService.jsx';
 import { getVisitCount } from '../web3/SmartContract.jsx';
 import { useState } from 'react';

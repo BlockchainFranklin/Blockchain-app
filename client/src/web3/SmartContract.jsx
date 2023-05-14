@@ -1,8 +1,8 @@
 import {mapResultFromInt} from '../services/Results.jsx';
 
 const walletAddress = window.ethereum.selectedAddress;
-const chainfitAddress = '0x8A1D8870837C4adaED9E6112522cBe367Ae7F512';
-const chainfitTokenAddress = '0x321340203F1C3Cec18f6adb17BBaF8515D1D9Bb2';
+const chainfitAddress = '0xE2EC2DCBA6EE7c767725A11a43683E00F399cf78';
+const chainfitTokenAddress = '0x3F1c8227DcECfDF9d110ee786b587580A3a3619E';
 
 const web3 = new Web3('ws://127.0.0.1:8545');
 import abi from "./CF_abi.jsx";
@@ -180,6 +180,12 @@ export async function getVisitRates(visitId) {
       alert(`Rate added`);
   }
 
+  export async function addVisit(hash) {
+    console.log(hash);
+    console.log(walletAddress);
+    const result = await contract.methods.addVisit(hash).send({ from: walletAddress, gas: 4700000 });
+    alert(`Visit added`);
+  }
 
   export async function getVisitIdByHash(visitHash){
     const gymVisits = await contract.methods.getVisitsToRate().call({ from: walletAddress });

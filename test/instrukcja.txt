@@ -1,0 +1,18 @@
+0. po zmianach w kontraktach należy podmienić pliki ABI i BYTECODE dla odpowiedniej rzeczy:
+	CF - wersja docelowa kontraktu
+	CFT - wersja docelowa tokena
+	CFTest - wersja testowa
+
+1. node deployToken.js (wdrożenie tokena)
+2. skopiowanie z konsoli adresu kontraktu i nadpisanie pliku cftokenaddress tymże adresem
+3. wdrażamy kontrakt:
+	test: node deployTest.js
+	prod: node deploy.js
+
+4. podmieniamy adresy w web3/SmartContract.jsx
+5. podmieniamy ABI w web3/CF_abi.jsx i web3/CFT_abi.jsx
+
+6. node setupCFT.js (ustawienie połączenia pomiędzy CFT a CF)
+
+7. jeżeli testujemy i chcemy wstawić przykładowe dane to nadpisujemy plik cfaddress wygenerowanym adresem
+8. node insertTestData.js (chwilę trwa i zawiesza GUI Ganache natłokiem transakcji)

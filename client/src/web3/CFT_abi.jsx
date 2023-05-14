@@ -554,8 +554,7 @@ const abiToken = [
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-];
-
+]
 
 
 
