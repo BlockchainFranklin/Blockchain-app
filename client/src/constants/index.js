@@ -27,12 +27,16 @@ export const navLinks = [
     title: "Features",
   },
   {
-    id: "highlights",
-    title: "Highlights",
+    id: "strategy",
+    title: "Strategy",
   },
   {
-    id: "partners",
-    title: "Partners",
+    id: "economic",
+    title: "Economic",
+  },
+  {
+    id: "roadmap",
+    title: "Roadmap",
   },
   {
     id: "contact",
@@ -76,18 +80,7 @@ export const visionText = [
   {
     id: "ourvision",
     title: "Our Vision",
-    content: "Welcome to ChainFit, the revolutionary new application that \
-    allows you to earn money while you work out at the gym. ChainFit uses \
-    blockchain technology to reward users for their physical activity and \
-    motivate them to stay active and healthy. With ChainFit, all you need \
-    to do is download the app, connect it to your gym or fitness center, \
-    and start logging your workouts. Every time you complete a workout, you \
-    will earn ChainFit tokens, which can be redeemed for real-world rewards \
-    like gift cards, merchandise, and even cryptocurrency. ChainFit uses \
-    state-of-the-art blockchain technology to ensure that your data is secure \
-    and that your rewards are distributed fairly. Plus, the app is easy to use \
-    and integrates seamlessly with your existing fitness routine. So why wait? \
-    Download ChainFit today and start earning money while you get fit!",
+    content: "ChainFit is the innovative app that rewards your workouts with real-world benefits. Earn money as you exercise at the gym, thanks to blockchain technology. Simply download the app, connect it to your fitness center, and start logging your activities. With each completed workout, you'll accumulate ChainFit tokens, which can be redeemed for exciting rewards like gift cards, merchandise, and even cryptocurrency. Your data is securely stored using advanced blockchain tech, ensuring fairness and privacy. Start maximizing your fitness journey today with ChainFit!",
   },
 ];
 
@@ -181,7 +174,7 @@ export const contactPeople = [
   {
     id: "adam",
     name: "Adam Miernicki",
-    content: "Udaję frontendowca",
+    content: "It student, interested in web technologies, internet of things and devops.",
     photo: adam,
     social: [
       { id: 1, icon: facebook , link: "https://www.facebook.com/adam.miernicki.fb" },
@@ -192,7 +185,7 @@ export const contactPeople = [
   {
     id: "julia",
     name: "Julia Błaszczyk",
-    content: "Rozliczam ludzi i podatki",
+    content: "A student of economic studies. Interested in finances and managment.",
     photo: julia,
     social: [
       { id: 1, icon: facebook , link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
@@ -202,8 +195,8 @@ export const contactPeople = [
   },
   {
     id: "milosz",
-    name: "Miłosz",
-    content: "Krypto master",
+    name: "Miłosz Szkudlarek",
+    content: "Management student. Interested in personal development.",
     photo: milosz,
     social: [
       { id:1, icon: facebook , link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
@@ -248,7 +241,7 @@ export const socialMedia = [
 export const buttonList = [
     {
       id: "phantom",
-      name: "Phantom",
+      name: "Phantom (coming soon)",
       icon: phantom,
       connector: injected,
     },

@@ -15,6 +15,23 @@ const Login = () => {
           <br className="sm:block hidden" /> {" "} 
         </h1>   
       </div>
+
+      <div className="center flex flex-row justify-between items-center w-full">
+        <h3 className="flex-1 font-poppins font-semibold ss:text-[42px] text-[32px] text-white ss:leading-[100px] leading-[75px]">
+          What is crypto wallet?  
+          <br className="sm:block hidden" /> {" "} 
+        </h3>  
+      </div>
+
+      <div className="center flex flex-row justify-center items-center w-full">
+        <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">
+          <button className="font-poppins font-semibold text-black text-lg bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded-md">
+            Learn More
+          </button>
+        </a>
+      </div>
+
+
       <div style={{ position: 'relative' }}>
         <div style={{ 
           position: 'absolute', 
@@ -23,11 +40,11 @@ const Login = () => {
           transform: 'translate(-50%, -50%)', 
           backgroundColor: 'rgba(0, 0, 0, 0.3)', 
           borderRadius: '20px', 
-          padding: '10px',
+          padding: '3vh',
           zIndex: 2 
           }}>
-          <h1 className='text-white text-center center font-semibold mr-4 text-lg'>
-            {loginText.find(btn => btn.id === 'choose').content} 
+          <h1 className='font-poppins font-semibold xs:text-[34.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] text-white text-center'>
+              Choose <span className="text-yellow-400">Wallet</span> <br /> <br /> to continue
           </h1>
           <br />
           <div className='mt-8' style={{ display: 'flex', flexDirection: 'column' }}>
@@ -49,7 +66,7 @@ const Login = () => {
           ))}
           </div>
         </div>
-        <Canvas camera={{ position: [0.0, 0.0, 9.0] }} style={{ position: 'relative', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
+        <Canvas camera={{ position: [0.0, 0.0, 7.0] }} style={{ position: 'relative', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
           <Sphere />
         </Canvas>
       </div>

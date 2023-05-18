@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { RiGalleryFill } from "react-icons/ri";
 import { TbPhotoSensor2 } from "react-icons/tb";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { MakePhoto }  from '../modals';
+import { MakePhoto, RealiseContract }  from '../modals';
+import { SHA256, enc } from "crypto-js";
 
 function LoadPhoto({ setOpenModal }) {
   const [showImagePicker, setShowImagePicker] = useState(false);
+  const [hash, setHash] = useState(null);
+  const [imageSrc, setImageSrc] = useState(null);
+  
   const handleLoadFromGalleryClick = () => {
     setShowImagePicker(true);
   };
@@ -16,10 +20,34 @@ function LoadPhoto({ setOpenModal }) {
   };
   const handleFileInputChange = (e) => {
     const selectedFile = e.target.files[0];
+  
     console.log(selectedFile);
-    // do something with the selected file
+    //const img = selectedFile.split(",")[1];
+    const hash = SHA256(selectedFile).toString(enc.Base64);
+    setHash(hash);
+    console.log(hash);
+
+    // Tworzenie obiektu FileReader
+    const reader = new FileReader();
+
+
+    // Ustawienie funkcji obsługi zdarzenia onLoad, która zostanie wywołana po wczytaniu pliku
+    reader.onload = () => {
+      const imageDataUrl = reader.result; // Pobranie danych URL obrazu
+  
+      // Ustawienie danych URL jako źródło obrazu
+      setImageSrc(imageDataUrl);
+      setModalOpen2(true);
+    };
+  
+    // Wczytanie zawartości pliku jako dane URL
+    reader.readAsDataURL(selectedFile);
   };
+
+
+
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen2, setModalOpen2] = useState(false);
 
   return (
     <div>
@@ -50,8 +78,16 @@ function LoadPhoto({ setOpenModal }) {
             style={{ display: "none" }}
             onChange={handleFileInputChange}
           />
-            <button className="btnWrapper1" onClick={handleButtonClick}>
-            Load from gallery</button>
+            <button className="btnWrapper1" onClick={ 
+              handleButtonClick
+              }>
+              Load from gallery</button>
+              {modalOpen2 && <RealiseContract 
+                setOpenModal={setModalOpen2}
+                setFile={null}
+                readyFile={imageSrc}
+                hash={hash}
+                />}
             </div>
           </div>
           <div className="iconBtnWrapper">

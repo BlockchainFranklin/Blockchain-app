@@ -19,17 +19,17 @@ const CardInfo = ({ photo, name, content, social }) => {
         <p className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite">{content}</p>
       </div>
       <br />
-      <div className="text-center" style={{ marginTop: '1rem' }}>
-        <div className="">
-          <section className="row">
-            {social.map((item) => (
-              <a key={item.id} className="btn btn-outline-light btn-floating m-1" href={item.link} target="_blank" role="button" style={{margin: '15px'}}>
-                <img src={item.icon} alt="" className="w-[100%] h-[100%]" />
-              </a>
-            ))}
-          </section>
+
+      <section className="row" style={{ display: "flex", gap: "10px" }}>
+      {social.map((item) => (
+        <div key={item.id}>
+          <a href={item.link} target="_blank" role="button">
+            <img src={item.icon} alt="icon" className="w-[100%] h-[100%]" />
+          </a>
         </div>
-      </div>
+      ))}
+    </section>
+
     </div>
   );
 };

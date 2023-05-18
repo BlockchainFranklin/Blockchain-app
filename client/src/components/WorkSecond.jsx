@@ -15,7 +15,7 @@ const WorkSecond = () => {
                 <img src={mobileph} alt="qr" className="w-[40%] h-[65%] relative z-[5] rounded-tl-100 rounded-br-5" />
             </div>
             <div data-aos="fade-right" className={layout.sectionInfo}>
-              {/*<div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full darkblue__gradient right-1" />*/}
+              <div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full darkblue__gradient right-1" />
               <h2 className={styles.heading2}>
                 {workText.find(btn => btn.id === 'worksecondtitle1').title} 
                 <br className="sm:block hidden" /> 

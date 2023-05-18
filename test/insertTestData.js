@@ -95,7 +95,7 @@ async function addGymVisitRate(visitId, userRated, ratingTime, rate, rateSource)
   console.log('Transaction hash:', tx.transactionHash);
 }
 
-/*
+
 for(let i=0; i<10; i++){
 	addGymVisit(addresses[i], t[12]-815, visitHashes[i]);
 }
@@ -113,8 +113,8 @@ for(let i=0; i<10; i++){
 for(let i=0; i<10; i++){
 	addGymVisit(addresses[i], t[0]-711, visitTestHashes[i]);
 }
-*/
 
+/*
 let steps = 50*15;
 let timeAll = 60*60*24*4;
 let timePerStep = Math.round(timeAll/steps);
@@ -127,3 +127,4 @@ for(let i=0; i<50; i++){
 		time += timePerStep;
 	}
 }
+*/

@@ -18,10 +18,10 @@
   --black-gradient: linear-gradient(
     144.39deg,
     #ffffff -278.56%,
-    #6d6d6d -78.47%,
-    #1d101b 91.61%
+    #2a2c06 -78.47%,
+    #8f8826 91.61%
   );
-  --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+  --card-shadow: 0px 20px 100px -10px rgba(32, 39, 68, 0.1);
   --primary-color: #0a141f; 
   --navbar-color: rgba(10, 22, 32, 0.8)
 }
@@ -30,14 +30,21 @@
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: var(--primary-color) !important;
+}
+
 .bg-primary {
-  background-color: var(--primary-color)
+  background-color: var(--primary-color) !important;
+}
+
+body.bg-primary {
+  background-color: var(--primary-color) !important;
 }
 
 .bg-navbar {
   background: var(--navbar-color)
 }
-
 
 hr {
   margin: 1.875em 0;
@@ -76,6 +83,34 @@ canvas {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
+}
+
+.text-gradient-yellow {
+  background: radial-gradient(
+
+    #f2e18d 17.23%,
+    #f2e18d 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.text-gradient-violet{
+  background: radial-gradient(
+    68.18% 64.18% at 75.16% 35.69%,
+    #672ba6 0.12%,
+    #672ba6 91.54%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.image-container {
+  box-shadow: 0 0 20px 8px rgb(245, 243, 218) inset;
 }
 
 .text-gradient-main {
@@ -190,7 +225,7 @@ canvas {
 
 .feedback-card {
   background: transparent;
-  background-color: #0c0c22;
+  background-color: #5c279488;
 }
 
 .feedback-card:hover {
@@ -226,25 +261,55 @@ canvas {
 }
 
 
+@keyframes yellowGradientAnimation {
+  0% {
+    background-color: rgb(214, 199, 125, 0.8);
+  }
+  50% {
+    background-color: rgb(214, 199, 125, 1);
+  }
+  100% {
+    background-color: rgb(214, 199, 125, 0.8);
+  }
+}
+
 .yellow__gradient {
-  background: linear-gradient(180deg, rgba(249, 255, 165, 0) 0%, #f2e18d 95%);
+  background-color: rgba(214, 199, 125, 0.815);
   filter: blur(100px);
 }
 
-.darkblue__gradient {
-  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #2c2a59 100%);
-  filter: blur(123px);
+.yellowdark__gradient {
+  background-color: rgba(214, 199, 125, 0.438);
+  filter: blur(300px);
 }
+
+.darkblue__gradient {
+  background: linear-gradient(90deg, rgba(188, 165, 255, 0) 0%, #2c2a59 100%);
+  filter: blur(50px);
+}
+
+.darkviolet__gradient {
+  background: linear-gradient(-90deg, rgba(188, 165, 255, 0) 0%, #3b124b 100%);
+  filter: blur(50px);
+}
+
+
+
+.violetblue__gradient {
+  background: linear-gradient(-90deg, rgba(188, 165, 255, 0) 0%, #320347 100%);
+  filter: blur(50px);
+}
+
 
 
 .lightblue__gradient {
-  background: linear-gradient(270deg, rgba(188, 165, 255, 0) 0%, #5a56bf 80%);
-  filter: blur(35vh);
+  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #6e69eb 80%);
+  filter: blur(18vh);
 }
 
-.pink__gradient {
-  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
-  filter: blur(900px);
+.violet__gradient {
+  background: linear-gradient(90deg, #eaf4c48a 0%, #5a108585 100%);
+  filter: blur(200px);
 }
 
 .white__gradient {
@@ -258,6 +323,16 @@ canvas {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+a {
+  color: white; /* Kolor domyślny */
+  text-decoration: none; /* Usunięcie podkreślenia */
+}
+
+a:hover {
+  color: rgb(184, 59, 184); /* Kolor po najechaniu myszką */
+  text-decoration: none; /* Usunięcie podkreślenia */
 }
 
 .box {
@@ -348,23 +423,22 @@ canvas {
 
 .box2 {
   position: relative;
-  width: 300px;
-  height: 400px;
+  width: 500px;
+  height: 300px;
   border-radius: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  margin-right: 5vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  padding: 6vh;
   margin-bottom: 5vh;
-  background: radial-gradient(
-    circle at center,
-    transparent,
-    rgba(0, 0, 0, 0.8)
-  );
+  opacity: 0.8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, #522385, #1e0d30);
   background-size: 200% 200%;
-  animation: gradient-animation 10s ease infinite;
   transform: scale(0.2);
   font-size: 2em;
 }
@@ -388,24 +462,17 @@ canvas {
 }
 
 .box2-first {
-  background-color: rgba(49, 32, 201, 0.5);
+  background-color: #4c207a;
 }
 
 .box2-second {
-  background-color: rgba(61, 1, 73, 1);
+  background-color: #4c207a;
 }
 
 .box2-third {
-  background-color: rgba(4, 126, 134, 0.9);
+  background-color: #4c207a;
 }
 
-.box2:nth-of-type(2) {
-  animation-delay: 2s;
-}
-
-.box2:nth-of-type(3) {
-  animation-delay: 4s;
-}
 
 
 
@@ -1045,7 +1112,7 @@ canvas {
 .modalPhotoContainer {
   margin-left: 5vw;
   width: 80vw;
-  height: 70vh;
+  height: 80vh;
   min-height: 400px;
   border-radius: 25px;
   background-color: #112133;
@@ -1117,4 +1184,22 @@ canvas {
   flex: 1;
   justify-content: center;
   align-items: center;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px; /* Dodatkowy odstęp między przyciskami (opcjonalnie) */
+}
+
+.photoImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qrCodeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
 }

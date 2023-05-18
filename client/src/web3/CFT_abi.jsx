@@ -556,6 +556,4 @@ const abiToken = [
 	}
 ]
 
-
-
 export default abiToken;

@@ -22,17 +22,28 @@ const AboutUs = () => {
           <hr style={{ opacity: '0.3', margin: '0' }}/>
         </div>
         <br />
-        <div data-aos="fade-up" className={`flex-1`}>
-          <h4 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-main text-center">
-            {visionText.find(btn => btn.id === 'ourvision').title}
-          </h4>
+        <div data-aos="fade-up" className={`flex-1 `}>
+        <div className="flex items-center justify-center">
+        <h4 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-yellow text-center" style={{ float: 'left', marginRight: '10px' }}>
+          Our
+        </h4>
+        <h4 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-violet text-center" style={{ float: 'left' }}>
+          Vision
+        </h4>
+        <div style={{ clear: 'both' }}></div>
+      </div>
+          
         </div>
         <br />
         <br />
-        <div data-aos="fade-up" className={``}>
-          <p className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] text-white text-center">
+        <div data-aos="fade-up" className="container">
+          <div className="row">
+            <div className="col-12">
+            <p className="font-poppins font-normal xs:text-[24.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] text-white text-center">
             {visionText.find(btn => btn.id === 'ourvision').content}
           </p>
+            </div>
+          </div>
         </div>
     </section>
   )

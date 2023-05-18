@@ -11,7 +11,7 @@ console.log('Visit to rate: ' + gymVisitsFrom3Days);*/
 //TODO: check 20 rates per 24h
 
 var source = 0;
-var visitHash = getParameterByName('visitId');
+var visitHash = getParameterByName('hash');
 var visitId = -1;
 var info = '';
 
@@ -20,6 +20,7 @@ if(!visitHash) {
     const randomPhoto = await getRandomGymVisitHashToRate();
     if(randomPhoto == null) {
         info = 'There is no visit to rate<br>Check it later.';
+        alert(`There is no visit to rate. Check it later.`);
     }
     else {
         visitId = randomPhoto[0];
@@ -45,14 +46,18 @@ if(info == '') {
     
 // Handle clicking the "Yes" button
 async function handleYesButtonClick() {
-    await addRate(visitId, 0, source);
-    window.location.href = 'addrate';
+    if(visitId != -1){
+        await addRate(visitId, 0, source);
+        window.location.href = 'addrate';
+    }
 }
 
 // Handle clicking the "No" button
 async function handleNoButtonClick() {
-    await addRate(visitId, 1, source);
-    window.location.href = 'addrate';
+    if(visitId != -1){
+        await addRate(visitId, 1, source);
+        window.location.href = 'addrate';
+    }
 }
     
 
@@ -77,12 +82,12 @@ const AddRate = () => {
     <section id="features" style={{ justifyContent: 'center', alignItems: 'center', width: '100%', maxWidth: '1800px', minHeight: '800px', margin: '0 auto' }}>
         <div class="container">
         <div class="row">
-            <div class="col-12 pb-3"><h1 class="text-center ">Is the photo taken at the gym?</h1></div>
+            <div class="col-12 pb-3"><h1 class="text-center" style={{ color: 'white', fontWeight: '700', fontSize: '20px' }}>Is the photo taken at the gym?</h1></div>
             <div class="col-6 text-center pb-3">
-                <button id="yes-button" type="button" onClick={() => handleYesButtonClick()} class="btn btn-success mr-3 w-50">Yes</button>
+                <button id="yes-button" type="button" onClick={() => handleYesButtonClick()} class="btn btn-success mr-3 w-50" style={{ border: '5px solid green', boxShadow: 'green 2px' }}>Yes</button>
             </div>
             <div class="col-6 text-center pb-3">
-                <button id="no-button" type="button" onClick={() => handleNoButtonClick()} class="btn btn-danger w-50">No</button>
+                <button id="no-button" type="button" onClick={() => handleNoButtonClick()} class="btn btn-danger w-50" style={{ border: '5px solid red', boxShadow: 'red 2px' }}>No</button>
             </div>
             <div class="col-12">
                 <div class="card">
@@ -91,7 +96,8 @@ const AddRate = () => {
                     </div>
                 </div>
             </div>
-            </div>
+        
+        </div>
         </div>
 </section>
   );

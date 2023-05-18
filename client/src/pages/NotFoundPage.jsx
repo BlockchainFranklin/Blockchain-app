@@ -31,8 +31,11 @@ const NotFoundPage = () => {
           <span className="digit">4</span>
         </h4>
         <pre>
-          <h4 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-main text-center">
-            {error404.find(btn => btn.id === '404').content}
+          <h4 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-yellow text-center">
+          We are proud of you for breaking new boundaries!
+
+          You have just broken the boundaries of our site
+          and the page you entered does not exist.
           </h4>
         </pre>   
         <br />

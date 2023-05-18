@@ -9,6 +9,8 @@ import WorkFirst from './WorkFirst'
 import WorkSecond from './WorkSecond'
 import WorkThird from './WorkThird'
 import WorkFourth from './WorkFourth'
+import Economic from './Economic'
+import Roadmap from './Roadmap'
 import ContactUs from './ContactUs'
 import Footer from './Footer'
 
@@ -33,6 +35,8 @@ export {
     WorkSecond,
     WorkThird,
     WorkFourth,
+    Economic,
+    Roadmap,
     ContactUs,
     Footer,
 

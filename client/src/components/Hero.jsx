@@ -11,20 +11,23 @@ const Hero = () => {
                 text-white ss:leading-[100px] leading-[75px]" style={{ zIndex: 1 }}>
                   {heroText.find(btn => btn.id === 'title1').content}
                   <br className="sm:block hidden" /> {" "} 
-                  <span className="text-gradient-main" style={{ zIndex: 1 }}>
-                    {heroText.find(btn => btn.id === 'title2').content}
-                  </span> {" "} 
+                  <span className="text-gradient-yellow" style={{ zIndex: 1 }}>
+                    cash 
+                  </span> {" "}
+                  <span className="text-gradient-violet" style={{ zIndex: 1 }}>
+                    it in.
+                  </span> {" "}
                 </h1>
             </div>
             <p className={`${styles.paragraph} max-w-[470px] mt-5 text-white`}  style={{ zIndex: 10 }}>
               {heroText.find(btn => btn.id === 'description').content}
             </p>
-            <div className="absolute z-[0] w-[95%] h-[100%] rounded-full overflow-hidden lightblue__gradient" /> 
+            <div className="absolute z-[0] w-[75%] h-[50%] rounded-full overflow-hidden lightblue__gradient" /> 
             {/*<div className="absolute z-[0] w-[5%] h-[40%] left-0 top-60 rounded-full bottom-40 yellow__gradient" /> */}
         </div>
         <div className={`flex-1 flex ${styles.flexCenter} sm:px-16 my-0 relative`}>
-          <img src={cellphone} alt="billing" className="heroicon w-[200%] h-[200%] relative z-[5]" />
-          <div className="absolute z-[0] w-[100%] h-[100%] overflow-hidden yellow__gradient" />
+          <img src={cellphone} alt="billing" className="heroicon w-[100%] h-[100%] relative z-[5]" />
+          <div className="absolute z-[0] w-[80%] h-[80%] overflow-hidden yellow__gradient" /> 
           {/*<div className="absolute z-[2] w-[50%] h-[50%] left-80 rounded-full white__gradient bottom-40" /> */}
 
           {/* <div className="absolute z-[3] w-[50%] h-[30%] left-10 bottom-20 darkblue__gradient" /> */}

@@ -13,7 +13,7 @@ const WorkFirst = () => {
     return (
         <section className={layout.section}>
             <div data-aos="fade-left" className={layout.sectionInfo}>
-            {/*<div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full darkblue__gradient left-1" />*/}
+            <div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full yellowdark__gradient left-1" />
            
                 <h2 className={styles.heading2}> 
                     {workText.find(btn => btn.id === 'workfirsttitle1').title} 
@@ -26,7 +26,7 @@ const WorkFirst = () => {
                             
             </div>
 
-            <div data-aos="fade-left" className={layout.sectionImgReverse}>
+            <div data-aos="fade-right" className={layout.sectionImgReverse}>
                 <img src={gymwalking} alt="workFirst" className="w-[100%] h-[100%]" />
             </div>
         </section>

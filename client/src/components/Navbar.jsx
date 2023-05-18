@@ -26,7 +26,10 @@ const Navbar = ({ type }) => {
             ))}
             <div className="mx-10">
               <Link to="/login">
-                <button className="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+              <button
+              className="bg-yellow-300 hover:bg-yellow-400 font-bold py-2 px-4 rounded"
+              style={{  color: "black" }}
+            >
                   {buttonText.find(btn => btn.id === 'connect').content}
                 </button>
               </Link>
@@ -56,7 +59,10 @@ const Navbar = ({ type }) => {
               ))}
               <div className="mx-10">
                 <Link to="/login">
-                  <button className="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+                <button
+                className="bg-yellow-300 hover:bg-yellow-400 font-bold py-2 px-4 rounded"
+                style={{  color: "black" }}
+              >
                     {buttonText.find(btn => btn.id === 'connect').content}
                   </button>
                 </Link>
@@ -70,7 +76,10 @@ const Navbar = ({ type }) => {
       {type === 'navbar2' && (
         <div className="mx-10">
           <Link to="/">
-            <button className="bg-yellow-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+          <button
+          className="bg-yellow-300 hover:bg-yellow-400 font-bold py-2 px-4 rounded"
+          style={{  color: "black" }}
+        >
               {buttonText.find(btn => btn.id === 'return').content}
             </button>
           </Link>

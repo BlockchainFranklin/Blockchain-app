@@ -3,6 +3,7 @@ import { getQuote } from '../hooks';
 import { MdOutlineAddAPhoto } from "react-icons/md";
 import { SiPhotobucket } from "react-icons/si";
 import { BiUpload, BiQrScan } from "react-icons/bi";
+import { SiHiveBlockchain } from "react-icons/si";
 import { LoadPhoto }  from '../modals';
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -66,8 +67,8 @@ const TakePhoto = () => {
             </div>
             <div className="columnTakePhoto" style={{marginLeft: "2vh", justifyContent: "center", alignItems: "center", color: "white", textAlign: "center"}}>
               <BiUpload size={50} style={{fill: "white"}}/>
-              <h2 style={{justifyContent: "center", alignItems: "center", color: "white"}}>
-              Upload photo by website</h2>
+              <h1 style={{justifyContent: "center", alignItems: "center", color: "white"}}>
+              Upload photo by website</h1>
             </div>
           </div>
 
@@ -77,7 +78,7 @@ const TakePhoto = () => {
             </div>
             <div className="columnTakePhoto" style={{marginLeft: "2vh", justifyContent: "center", alignItems: "center", color: "white", textAlign: "center"}}>
               <BiQrScan size={50} style={{fill: "white"}}/>
-              <h2>Generate QR code and link to share</h2>
+              <h2>Generate QR code with link to share</h2>
             </div>
           </div>
 
@@ -86,7 +87,7 @@ const TakePhoto = () => {
               4
             </div>
             <div className="columnTakePhoto" style={{marginLeft: "2vh", justifyContent: "center", alignItems: "center", color: "white", textAlign: "center"}}>
-              <MdOutlineAddAPhoto size={50} style={{fill: "white"}}/>
+              <SiHiveBlockchain  size={50} style={{fill: "white"}}/>
               <h2>Blockchain system</h2>
             </div>
           </div>

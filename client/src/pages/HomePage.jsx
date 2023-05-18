@@ -10,21 +10,26 @@ import {
   WorkSecond,
   WorkThird,
   WorkFourth,
+  Economic,
+  Roadmap,
   ContactUs,
   Footer,
 } from '../components'
 
 const HomePage = () => (
-  <div className="bg-primary w-full overflow-visible">
-    
 
+
+  <div className="bg-primary w-full overflow-visible">
+    <div style={{zIndex: 100}}>
+      <PreLoader/>
+    </div>
     {/*---------------------------------------- */}
     {/* NAVBAR */}
     <div className={`sticky top-0 
                      ${styles.paddingX} 
                      ${styles.flexCenter} 
                      bg-navbar`} 
-        style={{ zIndex: 9999, backdropFilter: 'blur(15px)'}}>
+        style={{ zIndex: 99, backdropFilter: 'blur(15px)'}}>
       <div className={`${styles.boxWidth} `}>      
         <Navbar type="navbar" />
       </div>
@@ -61,14 +66,22 @@ const HomePage = () => (
         <div style={{ margin: '15vh 0' }}>
         </div>  
         <AboutUs />
-        <div style={{ margin: '25vh 0' }}></div> 
+        <div style={{ margin: '15vh 0' }}></div> 
         <KeyFeatures />
+        <div style={{ margin: '15vh 0' }}></div> 
         <HowWorks />
-   
+        <div style={{ margin: '15vh 0' }}></div> 
+        {/*
+        <WorkFirst />
         <WorkSecond />
-     
+        <WorkThird />
         <WorkFourth />
-        <div style={{ margin: '80px 0' }}></div>    
+        */}
+
+        <Economic />
+        <div style={{ margin: '15vh 0' }}></div> 
+        <Roadmap />
+        <div style={{ margin: '15vh 0' }}></div>    
         <ContactUs />
       </div>    
     </div>

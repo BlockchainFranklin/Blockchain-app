@@ -6,6 +6,7 @@ import vertexShader from './vertexShader'
 import metaMask from './metaMask'
 import { injected } from './connectors'
 import getQuote from './getQuote'
+import generateAddress from './generateAddress'
 
 export {
     useReadingProgress,
@@ -16,4 +17,5 @@ export {
     metaMask,
     injected,
     getQuote,
+    generateAddress,
 }
