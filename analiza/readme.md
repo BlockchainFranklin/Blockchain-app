@@ -1,4 +1,4 @@
-### **Analysis folder**
+# **Analysis folder**
 
 Analysis folder in the ChainFit application repository - here you will find important documents and files related to the analysis and planning phase of the project. This folder serves as a centralized location for key information that helps stakeholders understand the business model, competitive landscape, stakeholder descriptions and estimates for ChainFit.
 
