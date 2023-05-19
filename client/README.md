@@ -1,4 +1,5 @@
-## About client application
+# Client application
+## Technologies
 The application was developed using given technologies and frameworks
 * ![React][react-shield]
 * ![Bootstrap][bootstrap-shield]
@@ -7,6 +8,16 @@ The application was developed using given technologies and frameworks
 * ![HTML5](https://img.shields.io/static/v1?style=for-the-badge&message=HTML5&color=E34F26&logo=HTML5&logoColor=FFFFFF&label=)
 * ![JavaScript](https://img.shields.io/static/v1?style=for-the-badge&message=JavaScript&color=222222&logo=JavaScript&logoColor=F7DF1E&label=)
 
+## Installation
+We can run the application locally or via a docker image. To run locally, we must have Node.js installed along with npm (Node Package Manager). Having already installed npm being in a folder, we need to install all the files required to create the page. All packages used are located in the package.json file and we can install them with the command:
+```sh
+npm install
+```
+If there are no errors, we can already run our application in development mode using the command
+```sh
+npm run dev
+```
+# Docker installation
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
