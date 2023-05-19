@@ -116,9 +116,9 @@ we can start server to store user photos.
 
 
 9. ### Install all packages for frontend client
-To install all important packages to run frontend client we need to execute command
+To install all important packages to run frontend client we need to execute command in client folder
 ```sh
-npm install ./client
+npm install
 ```
 10. ### Run our client app!
 To run our client app we need to enter command
