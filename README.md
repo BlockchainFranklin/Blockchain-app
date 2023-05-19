@@ -52,6 +52,9 @@ or in case of some problems
   127.0.0.1:80
   ```
 The frontend application in the docker image starts in development mode, which means that in a given mode we also have access to, for example, error messages and the performance of the application will not be fully optimized.
+
+In addition to the repository, it is possible to download the latest built version of the application thanks to githubaction from dockerhub
+https://hub.docker.com/r/adammiernicki/franklinfrontend
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
