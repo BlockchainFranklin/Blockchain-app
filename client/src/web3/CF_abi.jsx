@@ -75,6 +75,62 @@ const abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_visitTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_hash",
+				"type": "string"
+			}
+		],
+		"name": "addGymVisit",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_visitId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_userRated",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_ratingTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum ChainFit.Rate",
+				"name": "_rate",
+				"type": "uint8"
+			},
+			{
+				"internalType": "enum ChainFit.RateSource",
+				"name": "_rateSource",
+				"type": "uint8"
+			}
+		],
+		"name": "addGymVisitRate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "visitId",
 				"type": "uint256"
@@ -430,62 +486,6 @@ const abi = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "startIndex",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "endIndex",
-				"type": "uint256"
-			}
-		],
-		"name": "getVisits",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "visitId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "user",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "visitTime",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "hash",
-						"type": "string"
-					},
-					{
-						"internalType": "enum ChainFit.Result",
-						"name": "result",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "ratesIds",
-						"type": "uint256[]"
-					}
-				],
-				"internalType": "struct ChainFit.GymVisit[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "user",
 				"type": "address"
@@ -546,7 +546,78 @@ const abi = [
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getVisitsToRate",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "visitId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "visitTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "hash",
+						"type": "string"
+					},
+					{
+						"internalType": "enum ChainFit.Result",
+						"name": "result",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ratesIds",
+						"type": "uint256[]"
+					}
+				],
+				"internalType": "struct ChainFit.GymVisit[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "gymVisitRatesCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "gymVisitsCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	}
-]
+];
 
 export default abi;
