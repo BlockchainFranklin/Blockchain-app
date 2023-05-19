@@ -64,10 +64,10 @@ Connect Metamask wallet account to Ganache network and to generated address (by 
 Deploy chainFit token in folder test by command
 
 ```sh
-node ./test/deployToken.js
+node deployToken.js
 ```
 4. ### Change the token address in frontend client
-To change token address in our frontend client we need to copy result of command *node ./server/deployToken.js* to file ./client/src/web3/SmartContract.jsx and change address in cftokenaddress (as on printscreen below)
+To change token address in our frontend client we need to copy result of command *node deployToken.js* to file ./client/src/web3/SmartContract.jsx and change address in cftokenaddress (as on printscreen below)
 <br />
 <div align="center">
     <a href="https://github.com/othneildrew/Best-README-Template">
@@ -80,29 +80,28 @@ To change token address in our frontend client we need to copy result of command
 To deploy ChainFit contract we need to use command:
 
 ```sh
-node ./test/deploy.js
+node deploy.js
 ```
 
 6. ### Change the  address in frontend client
-To change token address in our frontend client we need to copy result of command *node ./server/deployToken.js* to file ./client/src/web3/SmartContract.jsx and change address in cftokenaddress
+To change token address in our frontend client we need to copy result of command *node deployToken.js* to file ./client/src/web3/SmartContract.jsx and change address in cfaddress
 
 ```sh
-node ./test/setupCFT.js
+node setupCFT.js
 ```
 
 ### 7 (extra step) Add random data
 In extra step to test our app we can add extra random data. To do that we need to enter command
 ```sh
-node ./test/insertTestData.js
+node insertTestData.js
 ```
 
 ### Photo server
 8. ### Photo server
-To store images made by users on server we need to run server. To do that we need to have installed Node.js with npm. By npm command
+To store images made by users on server we need to run server. To do that we need to have installed Node.js with npm. By npm command in server folder
 
 ```sh
-npm node serverPhoto.js
-npm ./server/savePhoto.js
+npm savePhoto.js
 ```
 we can start server to store user photos.
 
