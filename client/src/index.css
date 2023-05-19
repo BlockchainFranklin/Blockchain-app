@@ -307,6 +307,31 @@ canvas {
   filter: blur(18vh);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+.lightblue2__gradient {
+  background: linear-gradient(90deg, rgba(38, 26, 77, 0.705) 30%, #3a388080 80%);
+  filter: blur(15vh);
+}
+
+
+
+
+.lightblue3__gradient {
+  background: linear-gradient(90deg, rgb(151, 134, 214) 30%, #615ddafd 80%);
+  filter: blur(50vh);
+}
+
+
 .violet__gradient {
   background: linear-gradient(90deg, #eaf4c48a 0%, #5a108585 100%);
   filter: blur(200px);
@@ -358,6 +383,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  z-index: 1;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -751,6 +777,9 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-bottom: 2vh;
+  
+  background: radial-gradient(circle, rgba(12, 12, 1, 0.425) 10%, rgba(73, 36, 82, 0.26) 100%);
 }
 .dashboardHeadDashboard > .headDashboard {
   display: flex;
@@ -778,10 +807,15 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  align-items: center;
 }
 .cardHeadDashboard{
   font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+
 }
+
 .cardHeadDashboard>:nth-child(1)
 {
   color: rgba(255, 255, 255, 0.835);
@@ -789,14 +823,21 @@ a:hover {
 .cardHeadDashboard>:nth-child(2){
   margin-left: 1.5rem;
   font-size: 0.8rem;
-  color: #0bf82b;
+  color: #e6d818;
 }
+
+.cardAmountDashboard{
+  display: flex;
+  align-items: center;
+}
+
 .cardAmountDashboard>:nth-child(1)
 {
   font-size: 0.9rem;
-  color: rgb(25, 184, 11);
+  color: #e6d818;;
   position: relative;
   bottom: 5px;
+
 }
 .cardAmountDashboard>:nth-child(2)
 {
@@ -981,7 +1022,7 @@ a:hover {
   height: 25vh;
   min-height: 400px;
   border-radius: 25px;
-  background-color: #112133;
+  background: linear-gradient(45deg, #04274ef8, #1a0346);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
@@ -1068,22 +1109,36 @@ a:hover {
 
 .btnWrapper1 {
   margin-top: 4vh;
-  width: 200px;
-  height: 90px;
+  width: 15vw;
+  height: 7vh;
   border: none;
-  background-color: rgb(105, 110, 25);
+  background-color: rgb(148, 135, 18);
+  color: black;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+  
+}
+
+.btnWrapper1::before {
+  margin-top: 4vh;
+  width: 15vw;
+  height: 7vh;
+  border: none;
+  background-color: rgb(212, 193, 23);
   color: white;
   border-radius: 8px;
   font-size: 20px;
   cursor: pointer;
 }
 
+
 .btnWrapper2 {
   margin-top: 4vh;
-  width: 200px;
-  height: 90px;
+  width: 15vw;
+  height: 7vh;
   border: none;
-  background-color: rgb(155, 38, 223);
+  background-color: rgba(113, 12, 172, 0.911);
   color: white;
   border-radius: 8px;
   font-size: 20px;
@@ -1106,7 +1161,6 @@ a:hover {
   bottom: 0;
   margin: auto;
   border-radius: 25px;
-  z-index: 100;
 }
 
 .modalPhotoContainer {
@@ -1115,7 +1169,7 @@ a:hover {
   height: 80vh;
   min-height: 400px;
   border-radius: 25px;
-  background-color: #112133;
+  background: linear-gradient(45deg, #04274ef8, #1a0346);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
@@ -1163,17 +1217,17 @@ a:hover {
 }
 
 .btnWrapper {
-  margin-top: 10px;
+  margin-top: 1vh;
 }
 
 .btnWrapper3 {
-  margin-top: 2vh;
+  margin-top: 4vh;
   margin-left: 2vh;
   margin-right: 2vh;
   width: 200px;
   height: 40px;
   border: none;
-  background-color: rgb(155, 38, 223);
+  background-color: rgba(113, 12, 172, 0.911);
   color: white;
   border-radius: 8px;
   font-size: 20px;
@@ -1184,6 +1238,8 @@ a:hover {
   flex: 1;
   justify-content: center;
   align-items: center;
+  width: 40vw;
+  height: 20vh;
 }
 
 .buttonGroup {

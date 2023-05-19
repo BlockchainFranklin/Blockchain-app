@@ -1,5 +1,5 @@
 .counter{
-    background: #fff;
+    background: radial-gradient(circle, rgba(17, 1, 32, 0.274) 30%, rgba(107, 97, 10, 0.164) 100%);;
     text-align: center;
     width: 200px;
     min-height: 215px;
@@ -20,7 +20,7 @@
     top: 0;
 }
 .counter .counter-icon{
-    color: #fff;
+    color: #e6d818;
     background: #7CA936;
     font-size: 50px;
     line-height: 90px;
@@ -32,6 +32,21 @@
     position: relative;
     clip-path: polygon(0% 0%, 100% 0, 100% 70%, 50% 100%, 0 70%);
 }
+
+.counter-icon-react{
+    content: "";
+    background: #8AC248;
+    width: 120px;
+    height: 90px;
+    border-radius: 10px 10px 0 0;
+    transform: translateX(-50%);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: -1;
+    clip-path: polygon(0% 0%, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
+
 .counter .counter-icon:before{
     content: "";
     background: #8AC248;
@@ -71,9 +86,9 @@
 .counter.red .counter-icon{ background-color: #D14026; }
 .counter.red .counter-icon:before{ background-color: #EA5736; }
 .counter.red .counter-value{ color: #EA5736; }
-.counter.gray:before{ background-color: #777; }
-.counter.gray .counter-icon{ background-color: #444; }
-.counter.gray .counter-icon:before{ background-color: #666; }
+.counter.gray:before{ background-color: #3b0f68;  box-shadow: 0 0 3px 3px rgba(103, 23, 177, 0.678);}
+.counter.gray .counter-icon{ background-color: #1f0535; }
+.counter.gray .counter-icon:before{ background: radial-gradient(circle, rgba(12, 12, 1, 0.425) 10%, rgba(73, 36, 82, 0.589) 100%); }
 .counter.gray .counter-value{ color: #666; }
 @media screen and (max-width:990px){
     .counter{ margin-bottom: 40px; }

@@ -9,7 +9,7 @@ console.log('Visit to rate: ' + gymVisitsFrom3Days);*/
 
 
 //TODO: check 20 rates per 24h
-
+{/*
 var source = 0;
 var visitHash = getParameterByName('hash');
 var visitId = -1;
@@ -74,7 +74,9 @@ function getParameterByName(name, url) {
 }
 
 //<a onClick={() => handleButtonClick(gymVisit.visitId)} className="btnaccept btnaccept-lg"><span>Check visit</span></a>
-    
+*/}    
+
+var photoSrc = '';
 
 const AddRate = () => {
 
@@ -82,7 +84,7 @@ const AddRate = () => {
     <section id="features" style={{ justifyContent: 'center', alignItems: 'center', width: '100%', maxWidth: '1800px', minHeight: '800px', margin: '0 auto' }}>
         <div class="container">
         <div class="row">
-            <div class="col-12 pb-3"><h1 class="text-center" style={{ color: 'white', fontWeight: '700', fontSize: '20px' }}>Is the photo taken at the gym?</h1></div>
+            <div class="col-12 pb-5"><h1 class="text-center font-poppins font-semibold " style={{ color: 'white', fontWeight: '700', fontSize: '20px' }}>Is the photo taken at the gym?</h1></div>
             <div class="col-6 text-center pb-3">
                 <button id="yes-button" type="button" onClick={() => handleYesButtonClick()} class="btn btn-success mr-3 w-50" style={{ border: '5px solid green', boxShadow: 'green 2px' }}>Yes</button>
             </div>

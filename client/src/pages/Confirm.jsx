@@ -19,7 +19,7 @@ let visitCount = await getVisitCount(window.ethereum.selectedAddress);
 const Confirm = () => {
 
   return (
-    <section id="features" style={{ justifyContent: 'center', alignItems: 'center', width: '100%', maxWidth: '1800px', minHeight: '800px', margin: '0 auto' }}>
+    <section id="features" style={{ justifyContent: 'center', alignItems: 'center', width: '100%', maxWidth: '1800px', minHeight: '800px', margin: '0 0' }}>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <div class="container">
     <div class="row">
@@ -34,8 +34,6 @@ const Confirm = () => {
                             <div class="btn_group">
                                 <input type="text" class="form-control" placeholder="Search" />
                                 <button class="btn btn-default" title="Reload"><i class="fa fa-sync-alt"></i></button>
-                                <button class="btn btn-default" title="Pdf"><i class="fa fa-file-pdf"></i></button>
-                                <button class="btn btn-default" title="Excel"><i class="fas fa-file-excel"></i></button>
                             </div>
                         </div>
                     </div>

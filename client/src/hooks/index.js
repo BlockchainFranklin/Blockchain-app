@@ -7,6 +7,7 @@ import metaMask from './metaMask'
 import { injected } from './connectors'
 import getQuote from './getQuote'
 import generateAddress from './generateAddress'
+import saveFileToCFT from './saveFileToCFT'
 
 export {
     useReadingProgress,
@@ -18,4 +19,5 @@ export {
     injected,
     getQuote,
     generateAddress,
+    saveFileToCFT
 }

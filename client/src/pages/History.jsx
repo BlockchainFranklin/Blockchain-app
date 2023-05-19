@@ -27,8 +27,6 @@ const History = () => {
                             <div class="btn_group">
                                 <input type="text" class="form-control" placeholder="Search" />
                                 <button class="btn btn-default" title="Reload"><i class="fa fa-sync-alt"></i></button>
-                                <button class="btn btn-default" title="Pdf"><i class="fa fa-file-pdf"></i></button>
-                                <button class="btn btn-default" title="Excel"><i class="fas fa-file-excel"></i></button>
                             </div>
                         </div>
                     </div>

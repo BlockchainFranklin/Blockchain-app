@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { addVisit } from '../web3/SmartContract.jsx';
-import { generateAddress } from '../hooks';
+import { generateAddress, saveFileToCFT } from '../hooks';
 import QRCode from 'qrcode.react';
-import html2canvas from 'html2canvas';
-import domtoimage from 'dom-to-image';
 
 const { selectedAddress } = window.ethereum;
 if (selectedAddress !== null) {
@@ -21,9 +19,12 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
   useEffect(() => {
     const handleAddVisit = async () => {
       try {
-        console.log('Ready File:', readyFile);
+        //console.log('Ready File:', readyFile);
         let result = await addVisit(hash);
-        console.log('Add Visit Result:', result);
+
+        //let resultSave = await saveFileToCFT(readyFile, hash); // Zapisz plik w folderze CFT
+
+        //console.log('Add Visit Result:', result);
         // Ustawienie odpowiedniego komunikatu w zależności od wyniku
         if (result !== -1) {
           setResultMessage('Visit added!');
@@ -38,10 +39,14 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
       }
     };
 
+    handleAddVisit();
+  }, []);
+
+  useEffect(() => {
     const generateVisitString = async () => {
       try {
         const visitString = await generateAddress(selectedAddress, hash, readyFile);
-        console.log(visitString); // Tutaj otrzymasz string
+        //console.log(visitString); // Tutaj otrzymasz string
         setAd(visitString);
       } catch (error) {
         console.error(error);
@@ -53,7 +58,7 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       const image = new Image();
-      console.log(image);
+      //console.log(image);
       image.src = readyFile;
       image.onload = () => {
         canvas.width = image.width;
@@ -70,18 +75,18 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
       };
     };
 
-    handleAddVisit();
+
     generateImage();
     generateVisitString();
-  }, [readyFile, setOpenModal, setFile, hash, ad, downloadLink]);
+  }, [readyFile, setOpenModal, setFile, ad, downloadLink]);
 
-  console.log(ad);
+  //console.log(ad);
   return (
     <div className="modalPhotoBackground">
       {ad ? (
         <div>
           <div className="modalPhotoContainer">
-            <h1 style={{color: "white"}}> Download your photo and share!</h1>
+          <h1 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-white text-center"> Download your photo and share!</h1>
             <br/>
           {downloadLink && (
             <div className="photoImage">
@@ -120,14 +125,14 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
         </div>
           
             <br />
-            <h1 style={{color: "white"}}>Your QR code</h1>
+            <h1 className="font-poppins font-semibold xs:text-[20.89px] text-[15.89px] xs:leading-[10.16px] leading-[10.16px] text-white text-center">Your QR code</h1>
 
             <div className="qrCodeContainer">
-              <QRCode value={ad} size={75} />
+              <QRCode value={ad} size={75} /> 
             </div>
 
             <br/>
-            <h4 style={{color: "white", fontSize: "0.5em"}}>Your link to visit: {ad}</h4>
+            <h4 style={{color: "white", fontSize: "0.6em"}}>Your link to visit: {ad}</h4>
 
 
           </div>

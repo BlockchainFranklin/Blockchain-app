@@ -21,11 +21,11 @@ function LoadPhoto({ setOpenModal }) {
   const handleFileInputChange = (e) => {
     const selectedFile = e.target.files[0];
   
-    console.log(selectedFile);
+    //console.log(selectedFile);
     //const img = selectedFile.split(",")[1];
     const hash = SHA256(selectedFile).toString(enc.Base64);
     setHash(hash);
-    console.log(hash);
+    //console.log(hash);
 
     // Tworzenie obiektu FileReader
     const reader = new FileReader();
@@ -54,8 +54,8 @@ function LoadPhoto({ setOpenModal }) {
     <div className="overlay"></div>
     <div className="modalBackground" >
       <div className="modalContainer">
-        <div className="titleCloseBtn" style={{height: "50px"}}>
-          <button style={{height: "50px"}}
+        <div className="titleCloseBtn" style={{height: "1vh"}}>
+          <button style={{height: "1vh"}}
             onClick={() => {
               setOpenModal(false);
             }}
@@ -64,7 +64,8 @@ function LoadPhoto({ setOpenModal }) {
           </button>
         </div>
         <div className="title" style={{color: "white", fontSize: "2em"}}>
-          <h1>Choose option to load photo</h1>
+          <h1 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-white text-center">Choose option to load photo</h1>
+          <br />
         </div>
         <div className="bodyModal">
           <div className="iconBtnWrapper">
@@ -78,7 +79,7 @@ function LoadPhoto({ setOpenModal }) {
             style={{ display: "none" }}
             onChange={handleFileInputChange}
           />
-            <button className="btnWrapper1" onClick={ 
+            <button className="btnWrapper1 font-poppins font-semibold"  onClick={ 
               handleButtonClick
               }>
               Load from gallery</button>
@@ -95,7 +96,7 @@ function LoadPhoto({ setOpenModal }) {
               <TbPhotoSensor2 size={100} style={{ color: "white" }} />
             </div>
             <div >
-            <button className="btnWrapper2" onClick={() => {
+            <button className="btnWrapper2 font-poppins font-semibold" onClick={() => {
               setModalOpen(true);
               }}>Make photo</button>
               {modalOpen && <MakePhoto setOpenModal={setModalOpen} />}

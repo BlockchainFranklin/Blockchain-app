@@ -4,6 +4,7 @@ import { MdOutlineAddAPhoto } from "react-icons/md";
 import { SiPhotobucket } from "react-icons/si";
 import { BiUpload, BiQrScan } from "react-icons/bi";
 import { SiHiveBlockchain } from "react-icons/si";
+import { RiUserSharedLine } from "react-icons/ri";
 import { LoadPhoto }  from '../modals';
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -18,12 +19,17 @@ const TakePhoto = () => {
 
   return (
     <section id="features" className="sm:py-0 py-0 px-10 flex justify-center items-center flex-col relative" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto' }}>
-      {/* <div data-aos="zoom-in" className="absolute z-[0] w-[60%] h-[100%]  rounded-full lightblue__gradient bottom-40" /> */}
-        <h2 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-main text-center">
-          Make progress! <br />
-          Load photo
-          <br className="sm:block hidden" />
-        </h2>
+      <div data-aos="zoom-in" className="absolute z-[0] w-[40%] h-[40%]  rounded-full lightblue3__gradient top-0" /> 
+        <div className="flex items-center justify-center">
+        <h4 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-yellow text-center" style={{ float: 'left', marginRight: '10px' }}>
+          Make progress!
+        </h4>
+        <div style={{ clear: 'both' }}></div>
+      </div>
+      <h4 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-violet text-center" style={{ float: 'left', marginRight: '10px' }}>
+      Load photo
+    </h4>
+
         <br />
         <div className="relative light">
         <SiPhotobucket size={200} style={{ fill: "white" }} />
@@ -32,24 +38,28 @@ const TakePhoto = () => {
           style={{ top: '-0px', left: '-0px' }}
           />
         </div>
-        <div className="mx-10 py-10">
-          <button onClick={() => {
-            setModalOpen(true);
-          }} className="bg-yellow-400 hover:bg-yellow-400 text-white font-bold px-20 rounded" style={{ zIndex: 100, height: '75px', fontSize: '2.0em' }}>
-            Let load photo!
-          </button>
-          {modalOpen && <LoadPhoto setOpenModal={setModalOpen} />}
-          </div>
-
-        <div style={{color: "white", fontFamily: 'Bruno Ace SC', fontSize: '1.5em', fontWeight: 'bold', textAlign: 'center' }}>
+        <br />
+        <br />
+        <div style={{color: "white", fontFamily: 'Bruno Ace SC', fontSize: '1.1em', fontWeight: 'bold', textAlign: 'center' }}>
           <h2>{quote}</h2>
           <br/>
           <p style={{fontStyle: 'italic', fontSize: '0.8em'}}>{author}</p>
         </div>
 
+        <div className=" py-10">
+          <button onClick={() => {
+            setModalOpen(true);
+          }} className="bg-yellow-400 hover:bg-yellow-500 font-poppins font-semibold text-black font-bold px-20 rounded" style={{ height: '75px', fontSize: '2.0em' }}>
+            Let load photo!
+          </button>
+          {modalOpen && <LoadPhoto setOpenModal={setModalOpen} style={{zIndex: 100}} />}
+          </div>
+
+
+
       
 
-      <div className="w-full pt-16 pb-16 container row">
+      <div className="w-full  container row">
 
           <div data-aos="fade-center" data-aos-delay="50" className="containerTakePhoto">
             <div className="columnTakePhoto" style={{marginLeft: "10vh", justifyContent: "center", alignItems: "center", color: "white", fontFamily: 'Bruno Ace SC', fontSize: '10.0em', fontWeight: 'bold', textAlign: 'center' }}>
@@ -87,8 +97,8 @@ const TakePhoto = () => {
               4
             </div>
             <div className="columnTakePhoto" style={{marginLeft: "2vh", justifyContent: "center", alignItems: "center", color: "white", textAlign: "center"}}>
-              <SiHiveBlockchain  size={50} style={{fill: "white"}}/>
-              <h2>Blockchain system</h2>
+              <RiUserSharedLine  size={50} style={{fill: "white"}}/>
+              <h2>Share photo on social media</h2>
             </div>
           </div>
 

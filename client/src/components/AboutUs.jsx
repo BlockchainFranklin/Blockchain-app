@@ -38,8 +38,8 @@ const AboutUs = () => {
         <br />
         <div data-aos="fade-up" className="container">
           <div className="row">
-            <div className="col-12">
-            <p className="font-poppins font-normal xs:text-[24.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] text-white text-center">
+            <div className="col-9">
+            <p className="font-poppins font-normal xs:text-[24.45px] text-[15.45px] xs:leading-[36.58px] leading-[21.58px] text-white text-center">
             {visionText.find(btn => btn.id === 'ourvision').content}
           </p>
             </div>

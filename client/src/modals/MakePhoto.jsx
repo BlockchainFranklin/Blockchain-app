@@ -79,7 +79,7 @@ function MakePhoto({ setOpenModal }) {
           </button>
         </div>
         <div className="title" style={{color: "white", fontSize: "1.0em"}}>
-          <h1>Make photo</h1>
+        <h1 className="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-gradient-white text-center">Make photo</h1>
         </div>
         <div className="bodyPhotoModal">
           <div className="iconBtnWrapper">
@@ -101,11 +101,11 @@ function MakePhoto({ setOpenModal }) {
           {imageSrc ? (
             <div>
               <div className="buttonGroup">
-                <button className="btnWrapper3" onClick={() => setImageSrc(null)}>
+                <button className="btnWrapper3 font-poppins font-semibold" onClick={() => setImageSrc(null)}>
                   Make another
                 </button>
                 {!modalOpen2 && (
-                  <button className="btnWrapper3" onClick={() => setModalOpen(true)}>
+                  <button className="btnWrapper3 font-poppins font-semibold" onClick={() => setModalOpen(true)}>
                     It's OK!
                   </button>
                 )}
@@ -113,7 +113,7 @@ function MakePhoto({ setOpenModal }) {
             </div>
           ) : (
             <div>
-              <button className="btnWrapper3" onClick={capture}>
+              <button className="btnWrapper3 font-poppins font-semibold" onClick={capture}>
                 Make photo
               </button>
             </div>

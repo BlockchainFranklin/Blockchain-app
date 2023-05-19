@@ -27,14 +27,17 @@ const KeyFeatures = () => {
       </div>
         <br />
         <br />
-        <div className="w-full md:mt-0 mt-6">
-        <p className="font-poppins font-normal xs:text-[24.45px] text-[15.45px] xs:leading-[36.58px] leading-[21.58px] text-white text-center">
+        <div className="row">
+        <div className=" col-8" >
+        <p className="font-poppins font-normal xs:text-[24.45px] text-[15.45px] xs:leading-[36.58px] leading-[30.58px] text-white text-center">
             {keyFeaturesText.find(btn => btn.id === 'keyfeatures').content}
           </p>
-          <div class="col-12">
-              <img src={keyfeatures} class="img-fluid" alt="Grafika"/>
-            </div>
         </div>
+        </div>
+        <div class="col-12">
+        <img src={keyfeatures} class="img-fluid" alt="Grafika"/>
+      </div>
+
       </div>
 
 {/*
