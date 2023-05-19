@@ -71,6 +71,13 @@ To change token address in our frontend client we need to copy result of command
 <br />
 <div align="center">
     <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/changeAdress1 (1).png" alt="changeAddress"  >
+  </a>
+</div>
+
+<br />
+<div align="center">
+    <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="images/changeAdress2.png" alt="changeAddress"  >
   </a>
 </div>
