@@ -17,9 +17,9 @@ let ethPrice = 0.1;
 let cftPrice = 0.12;
 async function fetchEthereumPrice() {
   try {
-    //const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-    //const data = await response.json();
-    //ethPrice = data.ethereum.usd;
+    const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+    const data = await response.json();
+    ethPrice = data.ethereum.usd;
   } catch (error) {
     console.log('Error fetching Ethereum price:', error);
   }
@@ -27,24 +27,16 @@ async function fetchEthereumPrice() {
 
 await fetchEthereumPrice();
 
-//let ethBalanceText = await ethBalance();
-//ethBalanceText = parseFloat(ethBalanceText/10**18).toFixed(2);
+let ethBalanceText = await ethBalance();
+ethBalanceText = parseFloat(ethBalanceText/10**18).toFixed(2);
 
-//let cftBalanceText = await cftBalance();
-//cftBalanceText = parseFloat(cftBalanceText/10**18).toFixed(2);
+let cftBalanceText = await cftBalance();
+cftBalanceText = parseFloat(cftBalanceText/10**18).toFixed(2);
 
-//let allGymVisitsText = await getAllGymVisitCount();
-//let allVisitRatesText = await getAllGymVisitRatesCount();
-//let yourGymVisitsText = await getVisitCount();
-//let yourVisitRatesText = await getVisitRatesCount(window.ethereum.selectedAddress, 60*60*24*365*1);
-
-
-let ethBalanceText = 0;
-let cftBalanceText = 0;
-let allGymVisitsText = 0;
-let allVisitRatesText = 0;
-let yourGymVisitsText = 0;
-let yourVisitRatesText = 0;
+let allGymVisitsText = await getAllGymVisitCount();
+let allVisitRatesText = await getAllGymVisitRatesCount();
+let yourGymVisitsText = await getVisitCount();
+let yourVisitRatesText = await getVisitRatesCount(window.ethereum.selectedAddress, 60*60*24*365*1);
 
 const Dashboard = () => {
   return <section id="features" style={{ justifyContent: 'center', alignItems: 'center', width: '90%', maxWidth: '1800px', minHeight: '800px', margin: '0 auto' }}>
