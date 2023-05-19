@@ -27,6 +27,15 @@ The repository consists of several parts:
 * **Client folder** - 
 * **Test** - 
 
+<!-- CONTACT -->
+## Authors
+
+The project was made by
+* **Miłosz Szkudlarek** (leader of the team)
+* **Julia Błaszczyk**
+* **Adam Miernicki**
+
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
