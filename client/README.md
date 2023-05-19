@@ -36,7 +36,7 @@ docker run -p 80:3000 frontend
 
 We can enter to our app by address
 ```sh
-localhost:8-
+localhost:80
 ```
 
 <!-- MARKDOWN LINKS & IMAGES -->
