@@ -98,10 +98,18 @@ node insertTestData.js
 
 ### Photo server
 8. ### Photo server
-To store images made by users on server we need to run server. To do that we need to have installed Node.js with npm. By npm command in server folder
+To store images made by users on server we need to run server. To do that we need to have installed Node.js with npm. 
+We need also to install all packages by commands
 
 ```sh
-npm savePhoto.js
+ npm install express
+ npm install express-fileupload
+ npm install cors
+```
+To start our photo server in server folder we need to run commands
+```sh
+npx http-server -p 8080
+node savePhoto.jsx
 ```
 we can start server to store user photos.
 
