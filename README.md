@@ -22,10 +22,10 @@
 ChainFit is an application that utilizes blockchain technology to incentivize individuals to engage in physical fitness activities. Through the integration of blockchain, the app creates a decentralized platform that encourages people to adopt a healthy lifestyle.
 
 
-The repository consists of four parts in turn:
+The repository consists of several parts:
 * **Analyzes** - here you can find a detailed description of the application development and maintenance plans. The average costs assumed by the authors and the analysis of existing solutions on the market have been calculated
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
+* **Client folder** - 
+* **Test** - 
 
 ## License
 
