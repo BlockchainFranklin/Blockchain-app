@@ -123,9 +123,7 @@ and enter on webpage to adrress
 localhost:3000
 ```
 
-## Start on docker
-### Client (docker has only client image!)
-
+## Start on docker (docker has only client image!)
 
 ## Start on docker
 ### Client (docker has only client image!)
