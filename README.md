@@ -123,7 +123,7 @@ npm install
 10. ### Run our client app!
 To run our client app we need to enter command
 ``` sh
-npm run dev ./client
+npm run dev
 ```
 and enter on webpage to adrress
 ```sh
