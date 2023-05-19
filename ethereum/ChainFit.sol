@@ -109,8 +109,6 @@ contract ChainFit {
 
 
 
-
-
     ///////////////////////////////////////////////////////////////////
     //////////                                               //////////
     //////////                    EVENTS                     //////////
@@ -141,19 +139,23 @@ contract ChainFit {
     }
 
     function getVisitsToRate() external view returns(GymVisit[] memory) {
+        if(gymVisitsCount == 0) return new GymVisit[](0);
         uint i = gymVisitsCount-1;
         uint count = 0;
         while(i >= 0 && checkVisitRatingTimeNotExceed(i)) {
             if(gymVisits[i].user != msg.sender) count++;
-            i--;
+            if(i == 0) break;
+            else i--;
         }
+        if(count == 0) return new GymVisit[](0);
         GymVisit[] memory visits = new GymVisit[](count);
         uint j=0;
         i = gymVisitsCount-1;
         while(i >= 0 && checkVisitRatingTimeNotExceed(i)) {
             if(gymVisits[i].user != msg.sender) 
                 visits[j++] = gymVisits[i];
-            i--;
+            if(i == 0) break;
+            else i--;
         }
         
         return visits;
@@ -190,6 +192,7 @@ contract ChainFit {
 
         // Check if the visit exceeded the claim reward time
         if(gymVisits[visitId].visitTime + Const.CLAIN_REWARD_TIME < block.timestamp){
+            gymVisits[visitId].result = Result.Negative_pickTimeOut;
             return Result.Negative_pickTimeOut;
         }
         // Check if the user provided enough rates and it's social media count within the time limit
@@ -425,5 +428,4 @@ library Const {
     uint constant DAY_SECONDS = 60*60*24;
     uint constant WEEK_SECONDS = DAY_SECONDS * 7;
     uint constant APP_START_DATE = 1672527600; //2023.01.01
-    address constant DEFAULT_ADDRESS = address(0);
 }
