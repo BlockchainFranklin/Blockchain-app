@@ -30,8 +30,8 @@ The repository consists of several parts:
 
 
 In addition to the listed folders, there are also:
-* **./github/workflows** - description of building and testing and publishing the latest versions of our application in the repository
-* **ganache** - older containing instructions for building the Docker Ganache image
+* **./github/workflows** - description of building and testing and publishing the latest versions of our application in the repository.
+* **ganache** - folder containing instructions for building the Docker Ganache image.
 
 <!-- CONTACT -->
 ## Authors
