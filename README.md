@@ -73,36 +73,62 @@ To change token address in our frontend client we need to copy result of command
 <div align="center">
     <img src="images/changeAdress1.png" alt="changeAddress" width="300" height="200">
     <img src="images/changeAddress2.png" alt="changeAddress" width="300" height="200">
+    <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/changeAdress1 (1).png" alt="changeAddress"  >
+  </a>
 </div>
+
+<br />
+<div align="center">
+    <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/changeAdress2.png" alt="changeAddress"  >
+  </a>
+</div>
+
 
 5. ### Deploy ChainFit contract
 To deploy ChainFit contract we need to use command:
 ```sh
-node ./test/deploy.js
-```
-6. ### Change the address in frontend client
-To change  address in our frontend client we need to copy result of command *node ./server/deploy.js* to file ./client/src/web3/SmartContract.jsx and change address in cfaddress
-
-7. ### Connect ChainFit with ChainFitTocen 
-To connect ChainFit with ChainFitToken we need to enter command
+@@ -88,22 +97,34 @@ To connect ChainFit with ChainFitToken we need to enter command
 ```sh
 node ./test/setupCFT.js
 ```
 8. * Add random data
+7.a ### (extra step) Add random data
 In extra step to test our app we can add extra random data. To do that we need to enter command
 ```sh
 node ./test/insertTestData.js
 ```
 
 ### Photo server
+8. ### Photo server
 To store images made by users on server we need to run server. To do that we need to have installed Node.js with npm. By npm command
 
 ```sh
 npm node serverPhoto.js
+npm ./server/savePhoto.js
 ```
 we can start server to store user photos.
 
 
+
+8. ### Install all packages for frontend client
+To install all important packages to run frontend client we need to execute command
+```sh
+npm install ./client
+```
+9. ### Run our client app!
+To run our client app we need to enter command
+``` sh
+npm run dev ./client
+```
+and enter on webpage to adrress
+```sh
+localhost:3000
+```
+
+## Start on docker
+### Client (docker has only client image!)
 
 
 ## Start on docker
