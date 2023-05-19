@@ -42,9 +42,9 @@ The project was made by
 * **Adam Miernicki**
 
 <!-- GETTING STARTED -->
-## Start application
+## Start of application
 By downloading the entire repo material, it is possible to create and run a client folder image container using Docker.
-### Prerequisites
+### Install
 To run a given image, we must have Docker installed and be in the root folder of the repository. Then we can run the application with this command
   ```sh
   docker-compose up
