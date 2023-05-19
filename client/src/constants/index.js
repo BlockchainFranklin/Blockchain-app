@@ -80,7 +80,7 @@ export const visionText = [
   {
     id: "ourvision",
     title: "Our Vision",
-    content: "ChainFit is the innovative app that rewards your workouts with real-world benefits. Earn money as you exercise at the gym, thanks to blockchain technology. Simply download the app, connect it to your fitness center, and start logging your activities. With each completed workout, you'll accumulate ChainFit tokens, which can be redeemed for exciting rewards like gift cards, merchandise, and even cryptocurrency. Your data is securely stored using advanced blockchain tech, ensuring fairness and privacy. Start maximizing your fitness journey today with ChainFit!",
+    content: "ChainFit is the innovative app that rewards your workouts with real-world benefits. Earn money as you exercise at the gym, thanks to blockchain technology. Simply download the app and start logging your activities. With each completed workout, you'll be able to accumulate ChainFit tokens, which can be redeemed for exciting rewards like gift cards, merchandise or you can just sell them on market. Your data is securely stored using blockchain tech, ensuring fairness and privacy. Start maximizing your fitness journey today with ChainFit!",
   },
 ];
 

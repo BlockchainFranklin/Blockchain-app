@@ -6,8 +6,20 @@ import { BiUpload, BiQrScan } from "react-icons/bi";
 import { SiHiveBlockchain } from "react-icons/si";
 import { RiUserSharedLine } from "react-icons/ri";
 import { LoadPhoto }  from '../modals';
+import { checkOneVisitPer8h, checkThreeVisitsPerWeek } from '../web3/SmartContract.jsx';
 import Aos from "aos";
 import "aos/dist/aos.css";
+
+let per8h = await checkOneVisitPer8h();
+let perWeek = await checkThreeVisitsPerWeek();
+if(per8h == false){
+  alert('You added visit in last 8h');
+  window.location.href = 'confirm';
+}
+if(perWeek == false){
+  alert('You added three visits in last week');
+  window.location.href = 'confirm';
+}
 
 const TakePhoto = () => {
   useEffect(() => {

@@ -99,27 +99,27 @@ const abi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_visitId",
+				"name": "visitId",
 				"type": "uint256"
 			},
 			{
 				"internalType": "address",
-				"name": "_userRated",
+				"name": "userRated",
 				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_ratingTime",
+				"name": "ratingTime",
 				"type": "uint256"
 			},
 			{
 				"internalType": "enum ChainFit.Rate",
-				"name": "_rate",
+				"name": "rate",
 				"type": "uint8"
 			},
 			{
 				"internalType": "enum ChainFit.RateSource",
-				"name": "_rateSource",
+				"name": "rateSource",
 				"type": "uint8"
 			}
 		],
@@ -587,32 +587,6 @@ const abi = [
 				"internalType": "struct ChainFit.GymVisit[]",
 				"name": "",
 				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "gymVisitRatesCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "gymVisitsCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

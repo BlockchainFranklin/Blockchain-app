@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { addVisit } from '../web3/SmartContract.jsx';
-import { generateAddress, saveFileToCFT } from '../hooks';
+import { generateAddress } from '../hooks';
 import QRCode from 'qrcode.react';
 
 const { selectedAddress } = window.ethereum;
@@ -28,6 +28,7 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
         // Ustawienie odpowiedniego komunikatu w zależności od wyniku
         if (result !== -1) {
           setResultMessage('Visit added!');
+          
         } else {
           setResultMessage('There was a problem loading the photo. Make sure you have an internet connection and 8 hours have passed since your last visit');
         }
@@ -59,11 +60,57 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
       const context = canvas.getContext('2d');
       const image = new Image();
       //console.log(image);
-      image.src = readyFile;
+      image.src = readyFile; 
       image.onload = () => {
         canvas.width = image.width;
         canvas.height = image.height;
         context.drawImage(image, 0, 0);
+
+        //save file
+
+        /*const imgToSave = [image, hash+'.png'];
+        const formData = new FormData();
+        formData.append('image', image);
+        formData.append('fileName', hash);*/
+
+
+        const canvasToSave = canvas;
+        const dataURLToSave = canvasToSave.toDataURL('image/png');
+        const blob = new Blob([dataURLToSave], { type: dataURLToSave.type });
+
+        const formData = new FormData();
+        formData.append('image', blob, hash+'.jpg'); 
+        
+        /*function dataURItoBlob(dataURI) {
+          const byteString = atob(dataURI.split(',')[1]);
+          const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+          const ab = new ArrayBuffer(byteString.length);
+          const ia = new Uint8Array(ab);
+          for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+          return new Blob([ab], { type: mimeString });
+        }
+        
+        const canvasToSave = canvas;
+        const dataURLToSave = canvasToSave.toDataURL('image/png');
+        const blob = dataURItoBlob(dataURLToSave);
+        
+        const formData = new FormData();
+        formData.append('image', blob, hash + '.png');*/
+
+        fetch('http://localhost:8080/upload', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+        }) 
+        .catch(error => {
+          console.error('Błąd:', error);
+        }); 
+
         const qrCodeDataUrl = document.querySelector('.qrCodeContainer canvas').toDataURL('image/png');
         const qrCodeImage = new Image();
         qrCodeImage.src = qrCodeDataUrl;
@@ -72,8 +119,8 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
           const dataURL = canvas.toDataURL('image/png');
           setDownloadLink(dataURL);
         };
-      };
-    };
+      }; 
+    }; 
 
 
     generateImage();
@@ -132,7 +179,7 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
             </div>
 
             <br/>
-            <h4 style={{color: "white", fontSize: "0.6em"}}>Your link to visit: {ad}</h4>
+            {/*<h4 style={{color: "white", fontSize: "0.6em"}}>Your link to visit: {ad}</h4>*/}
 
 
           </div>

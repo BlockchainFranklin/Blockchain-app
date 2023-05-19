@@ -4,10 +4,12 @@ import {formatTime} from './FormatTime.jsx';
 
 export async function getGymVisitsTableView(){
   const gymVisits = await getAllGymVisits();
+  console.log(gymVisits);
   if(gymVisits == null) return [];
   
   const tableData = gymVisits.map(async (gymVisit) => {
     var rateData = await getRatesData(gymVisit.visitId);
+    console.log(rateData);
     const getRatesTextValue = await getRatesText(rateData);
     const getRatesPercentValue = await getRatesPercent(rateData);
     return [

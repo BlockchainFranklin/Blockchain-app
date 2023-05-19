@@ -1,8 +1,8 @@
 import {mapResultFromInt} from '../services/Results.jsx';
 
 const walletAddress = window.ethereum.selectedAddress;
-const chainfitAddress = '0xfb92a5df6E1b19d86ee6716c990B5a562FF1F307';
-const chainfitTokenAddress = '0xf4a8bBf6a39Cfd2b4A27a5A7C32A452CAD162921';
+const chainfitAddress = '0x777C981E06b450a51a86213DD0479a946129894D';
+const chainfitTokenAddress = '0x1DAb004cE8684cC21608e1497Cd882B21eAaa227';
 
 const web3 = new Web3('ws://127.0.0.1:8545');
 import abi from "./CF_abi.jsx";
@@ -30,11 +30,11 @@ export async function ethBalance(){
 
 
 export async function getAllGymVisitCount(){
-  return await contract.methods.gymVisitsCount().call();
+  return await contract.methods.getVisitsCount().call();
 }
 
 export async function getAllGymVisitRatesCount(){
-  return await contract.methods.gymVisitRatesCount().call();
+  return await contract.methods.getVisitRatesCount().call();
 }
 
 
@@ -163,7 +163,6 @@ export async function getVisitRates(visitId) {
   export async function checkVisit(visitId) {
 
     const checkVisitAndSendTransaction = async (visitId) => {
-      console.log('a');
       const resultRet = await contract.methods.checkVisit(visitId).call( {from: walletAddress} );
       console.log(resultRet)
       if(resultRet == 1){
@@ -202,9 +201,13 @@ export async function getVisitRates(visitId) {
 
   export async function getVisitIdByHash(visitHash){
     const gymVisits = await contract.methods.getVisitsToRate().call({ from: walletAddress });
-    for(let i=0; i<gymVisit.length; i++)
-      if(gymVisits[i].hash == visitHash)
+    console.log(gymVisits);
+    for(let i=0; i<gymVisits.length; i++){
+      console.log(visitHash);
+      console.log(gymVisits[i].hash);
+      if(gymVisits[i].hash.localeCompare(visitHash) == 0)
         return gymVisits[i].visitId;
+    }
     return -1;
   }
 
@@ -212,9 +215,18 @@ export async function getVisitRates(visitId) {
     return await contract.methods.checkRated(walletAddress, visitId).call({ from: walletAddress });
   }
 
+  export async function checkOneVisitPer8h(){
+    return await contract.methods.checkLastVisitTime().call({ from: walletAddress });
+  }
+
+  export async function checkThreeVisitsPerWeek(){
+    return await contract.methods.checkWeekVisitLimit().call({ from: walletAddress });
+  }
+
 
   export async function getRandomGymVisitHashToRate(){
     const gymVisits = await contract.methods.getVisitsToRate().call({ from: walletAddress });
+    console.log(gymVisits);
     const checked = new Array(gymVisits.length).fill(false);
     var ret = null;
     for(let i=0; i<gymVisits.length; i++){

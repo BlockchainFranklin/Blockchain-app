@@ -13,7 +13,7 @@ import { BsArrowRepeat } from "react-icons/bs";
 import { ethBalance, cftBalance, getAllGymVisitCount, getAllGymVisitRatesCount, getVisitCount, getVisitRatesCount } from '../web3/SmartContract.jsx';
 import "../styles/dashboard.css";
 
-let ethPrice = 0.1;
+let ethPrice;
 let cftPrice = 0.12;
 async function fetchEthereumPrice() {
   try {

@@ -23,7 +23,7 @@ function LoadPhoto({ setOpenModal }) {
   
     //console.log(selectedFile);
     //const img = selectedFile.split(",")[1];
-    const hash = SHA256(selectedFile).toString(enc.Base64);
+    const hash = SHA256(selectedFile).toString(enc.Base64).replace(/[+/]/g, '');
     setHash(hash);
     //console.log(hash);
 
