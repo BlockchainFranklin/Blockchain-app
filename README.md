@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="logo/logo.png" alt="Logo" width="300" height="200">
+    <img src="images/logo.png" alt="Logo" width="300" height="200">
   </a>
 
   <h3 align="center">ChainFit Repository Description</h3>
@@ -64,12 +64,35 @@ Connect Metamask wallet account to Ganache network and to generated address (by 
 Deploy chainFit token by command
 
 ```sh
-node ./server/deployToken.js
+node ./test/deployToken.js
 ```
 4. ### Change the token address in frontend client
 To change token address in our frontend client we need to copy result of command *node ./server/deployToken.js* to file ./client/src/web3/SmartContract.jsx and change address in cftokenaddress (as on printscreen below)
 
+<br />
+<div align="center">
+    <img src="images/changeAdress1.png" alt="changeAddress" width="300" height="200">
+    <img src="images/changeAddress2.png" alt="changeAddress" width="300" height="200">
+</div>
 
+5. ### Deploy ChainFit contract
+To deploy ChainFit contract we need to use command:
+```sh
+node ./test/deploy.js
+```
+6. ### Change the address in frontend client
+To change  address in our frontend client we need to copy result of command *node ./server/deploy.js* to file ./client/src/web3/SmartContract.jsx and change address in cfaddress
+
+7. ### Connect ChainFit with ChainFitTocen 
+To connect ChainFit with ChainFitToken we need to enter command
+```sh
+node ./test/setupCFT.js
+```
+8. * Add random data
+In extra step to test our app we can add extra random data. To do that we need to enter command
+```sh
+node ./test/insertTestData.js
+```
 
 ### Photo server
 To store images made by users on server we need to run server. To do that we need to have installed Node.js with npm. By npm command
