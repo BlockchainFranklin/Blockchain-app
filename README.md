@@ -23,7 +23,7 @@ ChainFit is an application that utilizes blockchain technology to incentivize in
 
 
 The repository consists of several parts:
-* **Analyzes** - here you can find a detailed description of the application development and maintenance plans. The average costs assumed by the authors and the analysis of existing solutions on the market have been calculated
+* **Analyzes** - here you can find a detailed description of the application development and maintenance plans. The average costs assumed by the authors and the analysis of existing solutions on the market have been calculated.
 * **Client folder** - this folder contains a description of the technologies used and a description of the installation to run and edit the application. The folder contains all the files responsible only for the frontend part of the application.
 * **Ethernum** - backend part of our application. Here you can find a description of the technologies used and a description of the most important methods
 * **Test** - folder with scripts responsible for generating sample data that were used to test the application
