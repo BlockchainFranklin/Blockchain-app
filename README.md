@@ -61,7 +61,7 @@ Run Ganache on locacalhost:8545 (different port) and create local blockchain.
 Connect Metamask wallet account to Ganache network and to generated address (by private key)
 
 3. ### Deploy Token
-Deploy chainFit token by command
+Deploy chainFit token in folder test by command
 
 ```sh
 node ./test/deployToken.js
