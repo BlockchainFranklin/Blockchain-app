@@ -90,7 +90,7 @@ To change token address in our frontend client we need to copy result of command
 node ./test/setupCFT.js
 ```
 
-7.a ### (extra step) Add random data
+### 7 (extra step) Add random data
 In extra step to test our app we can add extra random data. To do that we need to enter command
 ```sh
 node ./test/insertTestData.js
