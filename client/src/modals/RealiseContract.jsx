@@ -68,38 +68,14 @@ function RealiseContract({ setOpenModal, setFile, readyFile, hash }) {
 
         //save file
 
-        /*const imgToSave = [image, hash+'.png'];
-        const formData = new FormData();
-        formData.append('image', image);
-        formData.append('fileName', hash);*/
-
-
         const canvasToSave = canvas;
         const dataURLToSave = canvasToSave.toDataURL('image/png');
         const blob = new Blob([dataURLToSave], { type: dataURLToSave.type });
 
         const formData = new FormData();
         formData.append('image', blob, hash+'.jpg'); 
-        
-        /*function dataURItoBlob(dataURI) {
-          const byteString = atob(dataURI.split(',')[1]);
-          const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-          const ab = new ArrayBuffer(byteString.length);
-          const ia = new Uint8Array(ab);
-          for (let i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-          }
-          return new Blob([ab], { type: mimeString });
-        }
-        
-        const canvasToSave = canvas;
-        const dataURLToSave = canvasToSave.toDataURL('image/png');
-        const blob = dataURItoBlob(dataURLToSave);
-        
-        const formData = new FormData();
-        formData.append('image', blob, hash + '.png');*/
 
-        fetch('http://localhost:8080/upload', {
+        fetch('http://localhost:8081/upload', {
           method: 'POST',
           body: formData
         })
