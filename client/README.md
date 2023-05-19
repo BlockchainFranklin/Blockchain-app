@@ -17,7 +17,16 @@ If there are no errors, we can already run our application in development mode u
 ```sh
 npm run dev
 ```
-# Docker installation
+# Start docker image
+We can also run an image of our application using dockerfile. To do that we need to have docker installed. After that we should enter command to build our image
+```sh
+docker build -t frontend .
+```
+After image is created we can run our container on port 80 by command
+``` sh
+docker run -p 80:3000 frontend 
+```
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
