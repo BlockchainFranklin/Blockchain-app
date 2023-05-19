@@ -51,7 +51,7 @@ or in case of some problems
 ```sh
   127.0.0.1:80
   ```
-The frontend application in the docker image starts in development mode, which means that in a given mode we also have access to, for example, error messages and the performance of the application will not be fully optimized
+The frontend application in the docker image starts in development mode, which means that in a given mode we also have access to, for example, error messages and the performance of the application will not be fully optimized.
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
