@@ -35,7 +35,23 @@ The project was made by
 * **Julia Błaszczyk**
 * **Adam Miernicki**
 
-
+<!-- GETTING STARTED -->
+## Start application
+By downloading the entire repo material, it is possible to create and run a client folder image container using Docker.
+### Prerequisites
+To run a given image, we must have Docker installed and be in the root folder of the repository. Then we can run the application with this command
+  ```sh
+  docker-compose up
+  ```
+To check the operation of our application, launch the browser and type in it address:
+```sh
+  localhost:80
+  ```
+or in case of some problems
+```sh
+  127.0.0.1:80
+  ```
+The frontend application in the docker image starts in development mode, which means that in a given mode we also have access to, for example, error messages and the performance of the application will not be fully optimized
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
