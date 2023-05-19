@@ -42,9 +42,50 @@ The project was made by
 * **Adam Miernicki**
 
 <!-- GETTING STARTED -->
-## Start of application
+# Start of application
+
+## Start application locally
+
+# Prerequirements
+* Ganache
+* Node.js
+* Npm
+* Metamask web extension
+
+To run chainFit application locally is few steps that we need to configure first.
+
+1. ### Configure Ganache 
+Run Ganache on locacalhost:8545 (different port) and create local blockchain.
+
+2. ### Connect Metamask 
+Connect Metamask wallet account to Ganache network and to generated address (by private key)
+
+3. ### Deploy Token
+Deploy chainFit token by command
+
+```sh
+node ./server/deployToken.js
+```
+4. ### Change the token address in frontend client
+To change token address in our frontend client we need to copy result of command *node ./server/deployToken.js* to file ./client/src/web3/SmartContract.jsx and change address in cftokenaddress (as on printscreen below)
+
+
+
+### Photo server
+To store images made by users on server we need to run server. To do that we need to have installed Node.js with npm. By npm command
+
+```sh
+npm node serverPhoto.js
+```
+we can start server to store user photos.
+
+
+
+
+## Start on docker
+### Client (docker has only client image!)
 By downloading the entire repo material, it is possible to create and run a client folder image container using Docker.
-### Install
+
 To run a given image, we must have Docker installed and be in the root folder of the repository. Then we can run the application with this command
   ```sh
   docker-compose up
